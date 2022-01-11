@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Market</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="assets/css/mdb.min.css" />
+
+</head>
+
+<body>
+    <header>
+        <!-- Intro settings -->
+        <style>
+            /* Default height for small devices */
+            #intro-example {
+                height: 400px;
+            }
+
+            /* Height for devices larger than 992px */
+            @media (min-width: 992px) {
+                #intro-example {
+                    height: 600px;
+                }
+            }
+        </style>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Container wrapper -->
+            <div class="container-lg">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse text-center navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0 d-lg-block collapse" href="#">
+                        <img src="./assets/icon/restani.png" height="50" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link" href="#">Contack Us</a>
+                        </li>
+                        <a href="login.html" class="text-success d-lg-none fs-6 fw-bold mx-4">Login</a>
+                    </ul>
+                    <!-- Left links -->
+
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="align-items-center border-left d-lg-flex collapse">
+                    <a href="login.html" class="text-success fs-6 fw-bold mx-4">Login</a>
+                    <a href="#" class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+    </header>
+    <div class="container mt-4">
+        <div class="card" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
+            <div class="row">
+                <div class="col-lg-3 bg-success" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
+                    <ul class="list-unstyled">
+                        <li class="p-2 ml-4 my-4" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; margin-right: -12px;
+                            background-color: rgb(3, 94, 56);">
+                            <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50"
+                                alt="avatar">
+                            <span class="h6 ml-4 text-white">Joe Sandi</span>
+                        </li>
+                        <li class="p-2 ml-4 my-4"
+                            style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; margin-right: -12px;">
+                            <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50"
+                                alt="avatar">
+                            <span class="h6 ml-4 text-white">Joe Sandi</span>
+                        </li>
+                        <li class="p-2 ml-4 my-4"
+                            style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; margin-right: -12px;">
+                            <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50"
+                                alt="avatar">
+                            <span class="h6 ml-4 text-white">Joe Sandi</span>
+                        </li>
+                        <li class="p-2 ml-4 my-4"
+                            style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; margin-right: -12px;">
+                            <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50"
+                                alt="avatar">
+                            <span class="h6 ml-4 text-white">Joe Sandi</span>
+                        </li>
+                        <li class="p-2 ml-4 my-4"
+                            style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; margin-right: -12px;">
+                            <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50"
+                                alt="avatar">
+                            <span class="h6 ml-4 text-white">Joe Sandi</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="card-header">
+                        <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50" alt="avatar">
+                        <span class="h6 ml-4">Joe Sandi</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="pt-3 pe-3 overflow-scroll" data-mdb-perfect-scrollbar="true"
+                            style="position: relative; height: 400px;">
+
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Lorem
+                                        ipsum dolor
+                                        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                        labore et dolore
+                                        magna aliqua.</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-end">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Ut enim ad minim
+                                        veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Duis
+                                        aute irure
+                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur.</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-end">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Excepteur sint
+                                        occaecat cupidatat
+                                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Sed ut
+                                        perspiciatis
+                                        unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                                        totam rem
+                                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+                                        vitae dicta
+                                        sunt explicabo.</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-end">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Nemo enim ipsam
+                                        voluptatem quia
+                                        voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+                                        eos qui
+                                        ratione voluptatem sequi nesciunt.</p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Neque
+                                        porro quisquam
+                                        est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                                        quia non numquam
+                                        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+                                        voluptatem.</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-end">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Ut enim ad minima
+                                        veniam, quis
+                                        nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+                                        commodi
+                                        consequatur?</p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+                        </div>
+                        <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                alt="avatar 3" style="width: 40px; height: 100%;">
+                            <input type="text" class="form-control form-control-lg" id="exampleFormControlInput2"
+                                placeholder="Type message">
+                            <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
+                            <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
+                            <a class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="./assets/js/jquery-3.6.0.js"></script>
+    <script src="./assets/js/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

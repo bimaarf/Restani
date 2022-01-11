@@ -1,0 +1,153 @@
+
+
+.header {
+    background-color: white;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.288);
+}
+
+
+.logo, .logo img { width: 250px;}
+
+.navbar {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.navbar a::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--danger);
+    transition: width .3s;
+}
+
+.navbar a:hover{ font-weight: bolder;}
+
+.navbar a:hover::after { width: 100%;}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #ffffff;
+    display: none;
+    /* border: 1px solid var(--dark); */
+    border-radius: .5rem;
+}
+
+.dropdown-item{
+    padding: .5rem 1rem;
+    display: block;
+}
+
+.dropdown-menu.show { display: block;}
+
+.nav-toggle {
+    display: flex;
+    gap: 1rem;
+    align-items: center
+}
+
+.profil {
+    background-color: var(--danger);
+    padding: 6px;
+    padding-right: 10px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nama {
+    text-transform: capitalize;
+}
+
+.foto-profil {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--light);
+}
+
+.foto-profil img, .foto-identitas img {
+    width: 100%;
+}
+
+.toggle {
+    display: none;
+    cursor: pointer;
+    border: 2px solid var(--dark);
+    border-radius: 5px;
+}
+
+.toggle:hover{
+    box-shadow:  0 0 2px 1px rgba(0, 0, 0, 0.288);
+}
+
+.toggle div {
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: var(--dark);
+    transition: all 0.3s ease;
+}
+
+.toggle-active .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle-active .line2 {
+    opacity: 0;
+}
+
+.toggle-active .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media screen and (max-width:1000px){ .navbar {gap: 1rem;} }
+
+@media screen and (max-width:900px) {
+    .header {justify-content:space-between;}
+
+    .navbar {
+        position: absolute;
+        top: 11vh;
+        background-color: white;
+        width: 50%;
+        height: 89vh;
+        padding: 2rem;
+        flex-direction: column;
+        justify-content: start;
+        gap: 2rem;
+        align-items: baseline;
+        transform: translateX(200%);
+        transition: transform 0.3s ease;
+        border: 1px solid var(--light);
+    }
+
+    .navbar.active {transform: translateX(100%);}
+    .dropdown-menu{background-color: var(--light);}
+    .nav-toggle {justify-content: start;}
+    .toggle {display: block;}
+}
+
+@media screen and (max-width:500px){
+    .logo, .logo img { width: 200px}
+    .profil {padding: 2px;}
+    .profil span {display: none;}
+    .foto-profil {width: 32px;height: 32px;}
+    .navbar {top:10vh;width: 60%;}
+    .navbar.active {transform: translateX(65%);}
+}

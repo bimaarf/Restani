@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Market</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="assets/css/mdb.min.css" />
+    <link rel="stylesheet" href="./assets/css/admin.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="./assets/css/wave.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body style="background: #ffffff !important;">
+    <header>
+        <!-- Intro settings -->
+        <style>
+            /* Default height for small devices */
+            #intro-example {
+                height: 400px;
+            }
+
+            /* Height for devices larger than 992px */
+            @media (min-width: 992px) {
+                #intro-example {
+                    height: 600px;
+                }
+            }
+        </style>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <!-- Container wrapper -->
+            <div class="container-lg">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse text-center navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0 d-lg-block collapse" href="#">
+                        <img src="./assets/icon/restani.png" height="50" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item fw-bold mx-4">
+                            <a class="nav-link" href="#">Contack Us</a>
+                        </li>
+                        <a href="login.html" class="text-success d-lg-none fs-6 fw-bold mx-4">Login</a>
+                    </ul>
+                    <!-- Left links -->
+
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="align-items-center border-left d-lg-flex collapse">
+                    <a href="login.html" class="text-success fs-6 fw-bold mx-4">Login</a>
+                    <a href="#" class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+    </header>
+    <div class="pattern section-wave">
+        <div class="geeks">
+            <section class="vh-100">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-lg-12 col-xl-11">
+                            <div class="card text-black" style="border-radius: 25px;">
+                                <div class="card-body p-md-5">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h5 class="fw-bold">Login</h5>
+                                            <form action="#">
+                                                <div class="form-group">
+                                                    <label class="d-flex text-start fw-bold" for="name">Nama</label>
+                                                    <input class="form-control-lg form-control" type="text" id="name"
+                                                        name="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="d-flex text-start fw-bold" for="email">Email</label>
+                                                    <input class="form-control-lg form-control" type="email" id="email"
+                                                        name="">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="jenis_kelamin"
+                                                                class="d-flex text-start fw-bold">Jenis Kelamin</label>
+                                                            <select class="form-select form-select-lg"
+                                                                name="jenis_kelamin" id="jenis_kelamin">
+                                                                <option value=""></option>
+                                                                <option value="">Laki-laki</option>
+                                                                <option value="">Perempuan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label for="telp" class="d-flex text-start fw-bold">No.
+                                                                Telepon</label>
+                                                            <input class="form-control form-control-lg" type="tel">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password"
+                                                        class="d-flex text-start fw-bold">Password</label>
+                                                    <input class="form-control form-control-lg" type="password"
+                                                        name="password" id="password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password_confirmasi"
+                                                        class="d-flex text-start fw-bold">Konfirmasi Password</label>
+                                                    <input class="form-control form-control-lg" type="password"
+                                                        name="password_confirmasi" id="password_confirmasi">
+                                                </div>
+                                                <div class="form-check form-check text-start">
+                                                    <input type="checkbox" required><small>&nbsp;Saya setuju dengan
+                                                        <span class="text-success">Ketentuan, kebijakan privasi</span>
+                                                        dan <span class="text-success">biaya.</span></small>
+
+                                                </div>
+                                                <input type="submit" class="my-2 btn btn-success btn-lg" value="Register" style="width: 100%;">
+                                                <span class="text-black-50">Sudah punya akun ?</span><a href="login.html" class="text-success">Login</a>
+                                            </form>
+                                        </div>
+                                        <div class="col-lg-6 d-lg-block collapse">
+                                            <div class=""
+                                                style="background-image: url('https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2020/07/Featured_Manfaat-Tomat-Buah-Setia-dengan-Khasiat-Tak-Terkira.jpg'); height: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="./assets/js/jquery-3.6.0.js"></script>
+    <script src="./assets/js/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+    font-family: "Century Gothic";
+    src: url("../fonts/Century_Gothic/Century\ Gothic.ttf");
+}
+
+@font-face {font-family: "Tahu!";
+    src: url("../fonts/tahu/Tahu.eot"); /* IE9*/
+    src: url("../fonts/tahu/Tahu.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/tahu/Tahu.woff2") format("woff2"), /* chrome、firefox */
+    url("../fonts/tahu/Tahu.woff") format("woff"), /* chrome、firefox */
+    url("../fonts/tahu/Tahu.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url("../fonts/tahu/Tahu.svg#Tahu!") format("svg"); /* iOS 4.1- */
+  }
+
+:root {
+    --professional : "Open Sans";
+    --spirit : "Tahu!";
+    --though : "Century Gothic";
+    --gray : #4d4d4d;
+    --primary : #4ab748;
+    --info : #04a4ba;
+    --warning : #f1b708;
+    --danger : #db203f;
+    --light : #f2f2f4;
+    --dark : #1a1a1a;
+}
+
+body{
+    background-color: #f3f2ef !important;
+}
+
+body, p {
+    font-family: var(--professional) !important;
+}
+
+h1, h2, h3, h4, h5, h6, button, input, optgroup, select, textarea, label, a, .btn {
+    font-family: var(--though) !important;
+}
+
+.quote {
+    font-family: var(--spirit) !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {overflow-x: hidden}

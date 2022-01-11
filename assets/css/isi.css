@@ -1,0 +1,217 @@
+.content {
+    margin: 50px 100px;
+    border-radius: 30px;
+    display: flex;
+    gap: 2rem;
+}
+
+.menu {
+    width: 280px;
+    height: 70vh;
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.identitas {
+    padding: 20px; 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+    justify-content: start;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.foto-identitas {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--light);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar {
+    padding: 20px;
+}
+
+.sidelink {
+    list-style: none;
+    margin: 5px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.sidelink .submit {background: transparent;}
+
+.nav-side, .sidelink .submit {
+    padding: 15px 20px;
+}
+
+.sidelink.active, .sidelink:hover:not(.logout) {
+    background-color: var(--danger);
+}
+
+.sidelink.active a, .btn-logout, .sidelink:hover a{
+    color: var(--light) !important;
+}
+.btn-logout {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 17px;
+    width: 100%;
+}
+
+.logbtn {display: inline !important;}
+
+.sidelink a, .sidelink > form > button{
+    transition: all .2s ease;
+    text-decoration: none;
+    color: var(--dark);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.logout {
+    position: relative;
+    top: 100px;
+    background-color: var(--primary);
+}
+
+section {
+    width: 75%;
+    min-height: 70vh;
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.judul {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.perbarui-judul {
+    cursor: pointer;
+    background-color: var(--info);
+    padding: 5px 20px;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.isi {
+    padding: 20px;
+}
+
+.isi > div {
+    margin-bottom: 15px;
+}
+
+.isi div p {
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+
+@media screen and (max-width:900px){
+    .nav-side, .sidelink .submit {padding: 10px 15px;}
+}
+
+@media screen and (max-width: 680px){
+    .content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .menu {
+        width: 100%;
+        height: auto;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 30px;
+        display: flex;
+        padding: 0 20px;
+        align-items: center;
+        justify-content: space-between
+    }
+
+    .identitas {
+        display: block;
+        border-bottom:0;
+        padding: 0;
+        margin: 10px;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%
+        /* gap: 1rem; */
+    }
+
+    .sidelink {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidelink:not(.logout, .active) { border: 1px solid var(--danger); }
+
+    .logout { position: static; }
+
+    section {
+        width: 100%;
+        min-height: 50vh;
+        border-bottom-left-radius: 30px;
+        border-top-right-radius: 0;
+    }
+    
+    .nav-side span, .nama-identitas, .logbtn {display: none !important;}
+}
+
+@media screen and (max-width: 610px){
+    .foto-identitas, .sidelink {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 560px){ .content { margin: 50px; } }
+
+
+@media screen and (max-width: 460px){
+    .content { margin: 30px; }
+    
+    .menu {
+        padding: 0;
+        gap: 0px;
+    }
+}
+
+/* @media screen and (max-width: 335px){
+    .header {padding: .5rem;}
+    .logo, .logo img { width: 175px}
+    .navbar {top:6.5vh;width: 70%;}
+    .navbar.active {transform: translateX(40%);}
+    .nav-toggle {gap: .5rem}
+    .foto-profil {width: 23px; height: 23px}
+    .toggle div {width: 18px; height: 2px; margin: 4px;}
+    .toggle-active .line1 {transform: rotate(-40deg) translate(-4px, 5px);}
+    .toggle-active .line3 {transform: rotate(40deg) translate(-4px, -4px);}
+} */

@@ -1,0 +1,390 @@
+/* * {
+    border: 1px solid red !important;
+} */
+
+@import url(brand.css);
+
+/* scroll navbar */
+header {
+    transition: all 0.3s ease;
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+}
+
+.logo-img {
+    position: absolute;
+    top: 19.5625px;
+    left: 49.109375px;
+    width: 200px;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+
+.hidden {
+    opacity: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: start;
+    box-shadow: none !important;
+}
+
+.navbar li {
+    list-style: none;
+}
+
+.navbar a {
+    color: white;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav li a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.nav li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--danger);
+    transition: width .3s;
+}
+
+.nav li a:hover::after {
+    width: 100%;
+}
+
+.nav li a:hover {
+    color: white;
+}
+
+.navbar li a.dropdown-item {
+    color: var(--dark) !important;
+}
+
+.show {
+    z-index: 1;
+}
+
+
+.login {
+    margin-left: 50px;
+}
+
+.login a {
+    border-radius: 10px;
+    width: 100px;
+}
+
+.nav-toggler {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 50px;
+}
+
+.nav-toggler div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 1100px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .logo-img {
+        top: 16.171875px;
+    }
+
+    .navbar {
+        position: absolute;
+        right: 0px;
+        height: 100vh;
+        top: 0;
+        background-color: #000000b9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        padding-top: 8vh;
+    }
+
+    .navbar li,
+    .login {
+        opacity: 0;
+        margin: 20px 0;
+    }
+
+    .login a {
+        border-color: white !important;
+        color: white !important;
+    }
+
+    .navbar li a {
+        color: white !important;
+    }
+
+    .nav-toggler {
+        display: block;
+        z-index: 99;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggler .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    background-color: white !important;
+}
+
+.toggler .line2 {
+    opacity: 0;
+}
+
+.toggler .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+    background-color: white !important;
+}
+
+
+#hero {
+    width: 100%;
+    height: 120vh;
+    background: white url("../img/landing/mt_bg.png") no-repeat center;
+    /* background: white url("{{ asset('assets/img/mt_bg.png') }}") no-repeat center; */
+    background-size: cover;
+    top: 0;
+}
+
+.sdcards {
+    position: absolute;
+    width: 100%;
+    top: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 0 10px;
+
+}
+
+.sdcards .card {
+    width: 250px;
+    margin: 0 50px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.sdcards .card .card-body {
+    padding: 10px !important;
+    padding-bottom: 0 !important;
+}
+
+.sdcards .card .card-img-top {
+    width: 50%;
+}
+
+.link-card,
+.link-card:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.superiority,
+.jangkauan,
+.armada {
+    z-index: 1;
+}
+
+.jangkauan {
+    background-image: url("../img/landing/f1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 80px;
+    padding-bottom: 30px;
+}
+
+.jangkauan::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+}
+
+.jangkauan .jc-text {
+    color: #f2f2f4;
+    margin-bottom: 40px;
+}
+
+span.purecounter {
+    font-size: 48px;
+    display: block;
+    font-weight: 700;
+    color: var(--danger);
+}
+
+.sup-title,
+.image-ame,
+.super1,
+.super2,
+.super3 {
+    opacity: 0;
+    transform: scale(0.1);
+    transition: all 0.8s ease-in-out;
+}
+
+.image-ame {
+    transition-delay: 0.2s;
+}
+
+.super1 {
+    transition-delay: 0.4s;
+}
+
+.super2 {
+    transition-delay: 0.6s;
+}
+
+.super3 {
+    transition-delay: 0.8s;
+}
+
+.image-ame {
+    min-height: 400px;
+    background-image: url("../img/landing/f1.jpg");
+    background-size: cover;
+}
+
+.scroll-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mada {
+    width: 100px;
+}
+
+@media screen and (max-width: 1010px) {
+    #hero {
+        height: 100vh;
+    }
+
+    .sdcards {
+        top: 80vh;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #hero {
+        height: 85vh;
+    }
+
+    .sdcards {
+        top: 67vh;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #hero {
+        height: 70vh;
+    }
+
+    .sdcards {
+        top: 55vh;
+    }
+
+    .sdcards .card {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nav-toggler {
+        right: 30px;
+    }
+
+    .logo-img {
+        left: 30px;
+    }
+
+    #hero {
+        height: 50vh;
+    }
+
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    .sdcards {
+        top: 35vh;
+    }
+
+    .sdcards .card {
+        margin: 0 10px;
+    }
+
+    .sup-title,
+    .image-ame {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .super1 {
+        transition-delay: 0s;
+    }
+
+    .super2 {
+        transition-delay: 0.2s;
+    }
+
+    .super3 {
+        transition-delay: 0.4s;
+    }
+}
+
+
+
+
+/* Small devices (landscape phones, 576px and up) */
+/* @media (min-width: 576px) { ... } */
+
+/* Medium devices (tablets, 768px and up) */
+/* @media (min-width: 768px) { ... } */
+
+/* Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { ... } */
+
+/* Extra large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) {  } */
