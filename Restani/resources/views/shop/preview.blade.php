@@ -7,8 +7,9 @@
                 <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
                     <div class="carousel-indicators">
                         @foreach (json_decode($product->foto) as $key => $slider)
-                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="{{ $key }}"
-                                class="{{ $key == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-mdb-target="#carouselBasicExample"
+                                data-mdb-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"
+                                aria-current="true" aria-label="Slide 1"></button>
                         @endforeach
                     </div>
 
@@ -19,13 +20,14 @@
                                 <img src="{{ asset('product/' . $slider) }}" class="img-fuild img-thumbnail"
                                     style="height: 300px;width:400px;object-position: center;overflow: hidden;object-fit: cover;"
                                     alt="...">
+
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5 class="text-capitalize">Stok Tersedia</h5>
                                     <p>{{ $product->stok }}</p>
                                 </div>
                             </div>
                         @endforeach
-                        
+
                     </div>
 
                     <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
@@ -39,7 +41,7 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-              
+
             </div>
             <div class="col-lg-8 card-body">
                 <div class="float-left">
@@ -55,19 +57,21 @@
                 </div>
                 <a href="#!love" class="far fa-heart bg-primary rounded-circle p-3 text-white float-right mt-n2"></a>
                 <br><br><br><br><br>
-                <div class="float-none">
-                    <p class="text-body border-bottom pb-4">{!! $product->desc !!}</p>
+                @if ($product->stok > 0)
                     <i class="fa fa-check bg-success text-white rounded-circle p-1"></i> <span
                         class="ml-2 fw-bold h6 text-black-50">Stok Tersedia</span> <span
                         class="text-info">{{ $product->stok }}</span>
+                @else
+                    <span class="ml-2 fw-bold h6 text-danger">Stok Habis</span>
+                @endif
+                <div class="float-none">
+                    <p class="text-body border-bottom pb-4">{!! $product->desc !!}</p>
 
 
                     <div class="float-left">
+
                         <label for="jumlah">Jumlah</label>
-                        {{-- <input class="border-bottom border-0 border-success mx-4 my-1" type="number" min="0"
-                            max="{{ $product->stok }}" value="1" name="jumlah" id="jumlah"> --}}
-                        <br>
-                        <div class="number-input form-group border-0 float-right">
+                        <div class="number-input form-group ml-3 border-0 float-right">
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                 class="minus text-black-50 border" style="height: 30px ; width: 20px"></button>
 
@@ -77,18 +81,22 @@
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                 class="plus text-black-50 border" style="height: 30px ; width: 20px"></button>
                         </div>
+
                     </div>
-                    <div class="float-right">
+
                         <button onclick="cartAdd({{ $product->id }})"
-                            class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit">Masukkan
-                            Keranjang</button>
+                            class="btn btn-success rounded my-1 mx-4 text-capitalize float-right" type="submit"> <i
+                                class="fa fa-shopping-cart"></i><span class="d-lg-inline collapse"> Masukkan
+                                Keranjang</span></button>
                         <button onclick="bookAdd({{ $product->id }})"
-                            class="btn btn-info rounded-6 my-1 mx-4 text-capitalize" type="submit">Re-Booking</button>
-                        <input class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit"
+                            class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
+                            type="submit">Re-Booking</button>
+                        <input class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right" type="submit"
                             value="Beli Sekarang">
-                    </div>
+
                 </div>
                 <div class="float-left mt-4">
+
                     <div class="card my-4">
                         <div class="card-body">
                             <img src="{{ asset('assets/img/landing/aman.png') }}" width="40" alt="">
