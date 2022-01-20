@@ -22,6 +22,7 @@ class CreateTbProdukTable extends Migration
             $table->string('stok', 255);
             $table->string('foto', 255);
             $table->string('lokasi', 255);
+            $table->bigInteger('rating')->nullable();
             $table->unsignedBigInteger('kategori_id');
             $table->foreign('kategori_id')->references('id')->on('tb_kategori');
             $table->unsignedBigInteger('user_id');

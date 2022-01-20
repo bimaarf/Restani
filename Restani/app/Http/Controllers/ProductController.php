@@ -11,11 +11,18 @@ class ProductController extends Controller
 {
     public function shop()
     {
+        
+        $category   = Category::all();
+        return view('shop.product', compact('category'));
+    }
+
+    public function shopElement()
+    {
         $category   = Category::all();
         $product    = Product::orderBy('id', 'DESC')->get();
-
-        return view('shop.product', compact('category', 'product'));
+        return view('shop.elements.product', compact('category', 'product'));
     }
+    
     public function preview($slug)
     {
         $product    = Product::where('slug', $slug)->first();
@@ -25,7 +32,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'foto'      =>      'required',
-            'foto.*'      =>      'mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+            'foto.*'      =>      'mimes:jpeg,jpg,png',
         ]);
 
         $product                    = new Product();

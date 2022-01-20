@@ -21,7 +21,7 @@
                     <a class="nav-link @yield('shop')" href="{{ route('shop.product') }}">Shop</a>
                 </li>
                 <li class="nav-item fw-bold mx-4">
-                    <a class="nav-link" href="#">Re-booking</a>
+                    <a class="nav-link @yield('booking')" href="{{ route('shop.booking') }}">Re-booking</a>
                 </li>
                 <li class="nav-item fw-bold mx-4">
                     <a class="nav-link" href="#">Subscribe</a>
@@ -29,7 +29,9 @@
                 @if (Auth::check())
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="#" class="btn btn-outline-info d-lg-none fw-bold ml-4 fs-6 text-capitalize rounded-pill" onclick="event.preventDefault();
+                        <a href="#"
+                            class="btn btn-outline-info d-lg-none fw-bold ml-4 fs-6 text-capitalize rounded-pill"
+                            onclick="event.preventDefault();
                 this.closest('form').submit();">Logout</a>
                     </form>
                 @else
@@ -43,6 +45,11 @@
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
+        <a href="#" class="fa fa-comment-dots mx-4"><span
+                class="badge rounded-pill badge-notification bg-danger">1</span></a>
+        <a href="#" class="fa fa-heart mx-4"><span class="badge rounded-pill badge-notification bg-danger">1</span></a>
+        <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-4"><span
+                class="badge rounded-pill badge-notification bg-danger" id="cart" style="display: none">0</span></a>
         <div class="align-items-center border-left d-lg-flex collapse">
             @if (Auth::check())
                 <form method="POST" action="{{ route('logout') }}">
@@ -60,3 +67,21 @@
     </div>
     <!-- Container wrapper -->
 </nav>
+<script>
+    function cartCount() {
+        const url = "{{ route('shop.elements.countCart') }}";
+        $.get(url, {}, function(checkouts, status) {
+            const query = "#cart"
+            
+            $(query).html(checkouts);
+            if(checkouts == 0) {
+                document.getElementById('cart').style.display = 'none';
+            }else{
+                document.getElementById('cart').style.display = 'inline';
+            }
+        });
+    }
+    window.onload = function() {
+        cartCount();
+    }
+</script>

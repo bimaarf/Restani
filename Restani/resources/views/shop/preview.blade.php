@@ -4,16 +4,16 @@
         <div class="row">
             <div class="col-lg-4 my-2 card-body">
 
-                <!-- Carousel wrapper -->
                 <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
                     <div class="carousel-indicators">
                         @foreach (json_decode($product->foto) as $key => $slider)
-                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0"
+                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="{{ $key }}"
                                 class="{{ $key == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide 1"></button>
                         @endforeach
                     </div>
 
                     <div class="carousel-inner">
+
                         @foreach (json_decode($product->foto) as $key => $slider)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                                 <img src="{{ asset('product/' . $slider) }}" class="img-fuild img-thumbnail"
@@ -25,19 +25,23 @@
                                 </div>
                             </div>
                         @endforeach
+                        
                     </div>
 
-                    <button class="carousel-control-prev" type="button" data-target="#carouselBasicExample"
-                        data-slide="prev">
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
+                        data-mdb-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-target="#carouselBasicExample"
-                        data-slide="next">
+                    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
+                        data-mdb-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+                <!-- Carousel wrapper -->
+              
             </div>
             <div class="col-lg-8 card-body">
                 <div class="float-left">
@@ -51,28 +55,40 @@
                     </div>
                     <p class="h5 text-success">Rp {{ $product->harga }}</p>
                 </div>
-                <a href="#!love" class="far fa-heart bg-success rounded-circle p-3 text-white float-end"></a>
-                <br><br><br><br>
+                <a href="#!love" class="far fa-heart bg-primary rounded-circle p-3 text-white float-right mt-n2"></a>
+                <br><br><br><br><br>
                 <div class="float-none">
                     <p class="text-body border-bottom pb-4">{!! $product->desc !!}</p>
                     <i class="fa fa-check bg-success text-white rounded-circle p-1"></i> <span
                         class="ml-2 fw-bold h6 text-black-50">Stok Tersedia</span> <span
                         class="text-info">{{ $product->stok }}</span>
 
-                    <form action="#">
-                        <div class="float-left">
-                            <label for="jumlah">Jumlah</label>
-                            <input class="border-bottom border-0 border-success mx-4 my-1" type="number" min="0"
-                                max="{{ $product->stok }}" value="1" name="jumlah" id="jumlah">
 
+                    <div class="float-left">
+                        <label for="jumlah">Jumlah</label>
+                        {{-- <input class="border-bottom border-0 border-success mx-4 my-1" type="number" min="0"
+                            max="{{ $product->stok }}" value="1" name="jumlah" id="jumlah"> --}}
+                        <br>
+                        <div class="number-input form-group border-0 float-right">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                class="minus text-black-50 border" style="height: 30px ; width: 20px"></button>
+
+                            <input id="jumlah" class="text-center border" min="1" name="quantity" value="1" type="number"
+                                style="width: 60px; height: 30px;" disabled>
+
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                class="plus text-black-50 border" style="height: 30px ; width: 20px"></button>
                         </div>
-                        <div class="float-right">
-                            <input class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit"
-                                value="Masukkan Keranjang">
-                            <input class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit"
-                                value="Beli Sekarang">
-                        </div>
-                    </form>
+                    </div>
+                    <div class="float-right">
+                        <button onclick="cartAdd({{ $product->id }})"
+                            class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit">Masukkan
+                            Keranjang</button>
+                        <button onclick="bookAdd({{ $product->id }})"
+                            class="btn btn-info rounded-6 my-1 mx-4 text-capitalize" type="submit">Re-Booking</button>
+                        <input class="btn btn-success rounded-6 my-1 mx-4 text-capitalize" type="submit"
+                            value="Beli Sekarang">
+                    </div>
                 </div>
                 <div class="float-left mt-4">
                     <div class="card my-4">
@@ -253,16 +269,18 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+    </script> --}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
     <script>
         document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault()''
+            e.preventDefault()
+            ''
         })
     </script>
+
 @endsection
