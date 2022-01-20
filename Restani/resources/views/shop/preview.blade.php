@@ -28,7 +28,6 @@
                         
                     </div>
 
-                    <!-- Controls -->
                     <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
                         data-mdb-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -40,7 +39,6 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <!-- Carousel wrapper -->
               
             </div>
             <div class="col-lg-8 card-body">

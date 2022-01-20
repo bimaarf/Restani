@@ -19,6 +19,7 @@
         trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
+
     </style>
     @if (Request::url() != 'route("shop.product")')
         <link rel="stylesheet" href="{{ asset('assets/css/number.css') }}">
@@ -80,6 +81,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+       
         function shopElement() {
             const url = "{{ route('shop.elements.product') }}"
             $.get(url, {}, function(bookings, status) {
@@ -128,6 +130,7 @@
                 success: function(response) {
                     swal({
                         title: "Dihapus",
+                        text: 'Produk dihapus dari keranjang!',
                         type: "success",
                         confirmButtonClass: "btn-danger",
                         confirmButtonText: "Yes!",
@@ -228,6 +231,7 @@
                 success: function(response) {
                     swal({
                         title: "Dihapus",
+                        text: 'Produk dihapus dari re-booking!',
                         type: "success",
                         confirmButtonClass: "btn-danger",
                         confirmButtonText: "Yes!",
@@ -247,7 +251,7 @@
                 $(query).html(bookings);
             });
         }
-       cartCount();
+        cartCount();
     </script>
 
 </body>

@@ -6,12 +6,20 @@
             </div>
             <div class="card-body">
                 <div class="list-group list-group-flush">
-                    @foreach ($category as $categ)
 
-                        <a href="#"
-                            class="list-group-item text-black-50 list-group-item-action">{{ $categ->name }}</a>
+                    @foreach ($category as $categ)
+                        <form class="d-none d-md-flex input-group w-auto my-auto fa-pull-right"
+                            action="{{ route('shop.tag') }}">
+                            <input type="hidden" value="{{ $categ->id }}" class="form-control" name="search"
+                                placeholder='Cari username' onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Cari username'">
+
+                            <button type="submit"
+                                class="list-group-item text-black-50 list-group-item-action border-0">{{ $categ->name }}</button>
+                        </form>
 
                     @endforeach
+
                 </div>
             </div>
         </div>
@@ -97,8 +105,8 @@
             </div>
             <div class="col-8">
                 <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Cari Produk"
-                        aria-label="Search" aria-describedby="search-addon" />
+                    <input type="search" class="form-control rounded" placeholder="Cari Produk" aria-label="Search"
+                        aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="fas fa-search"></i>
                     </span>
@@ -115,8 +123,8 @@
 
                     <div class="card rounded-6 mt-n4">
                         <div class="card-body">
-                            <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden"
-                                value="1" name="jumlah" id="jumlah">
+                            <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden" value="1"
+                                name="jumlah" id="jumlah">
                             <a href="#add" onclick="cartAdd({{ $prod->id }})"><i
                                     class="fa fa-plus-circle text-success fa-pull-right"></i></a>
                             <a href="{{ route('shop.preview', ['slug' => $prod->slug]) }}">

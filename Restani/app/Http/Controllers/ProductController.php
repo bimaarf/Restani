@@ -15,11 +15,22 @@ class ProductController extends Controller
         $category   = Category::all();
         return view('shop.product', compact('category'));
     }
-
+    public function tag(Request $request)
+    {
+        if($request->has(['search'])) {
+            $product    = Product::where('kategori_id', 'LIKE', '%'.$request->search. '%')
+                                    ->orderBy('id', 'DESC')->get();
+        }else {
+            $product    = Product::orderBy('id', 'DESC')->get();
+        }
+        $category   = Category::all();
+        return view('shop.tag', compact('product', 'category'));
+    }
     public function shopElement()
     {
-        $category   = Category::all();
+        
         $product    = Product::orderBy('id', 'DESC')->get();
+        $category   = Category::all();
         return view('shop.elements.product', compact('category', 'product'));
     }
     

@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::get('/shop/tag', [ProductController::class, 'tag'])->name('shop.tag'); //index
 
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop.product'); //index
 Route::get('/shop/elements', [ProductController::class, 'shopElement'])->name('shop.elements.product'); //elements
