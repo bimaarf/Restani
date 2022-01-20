@@ -102,8 +102,7 @@
                     <img src="{{ asset('assets/icon/label.png') }}" class="img-fluid" alt="">
                     <div class="row my-4">
                         <div class="col-4">
-                            <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Tambah
-                                Produk</button>
+                            
                         </div>
                         <div class="col-8">
                             <div class="input-group rounded">

@@ -251,6 +251,73 @@
                 $(query).html(bookings);
             });
         }
+        // langganan
+        function tableSub() {
+            const url = "{{ route('shop.elements.subscribe') }}"
+            $.get(url, {}, function(subscribe, status) {
+                const query = "#subscribe"
+                $(query).html(subscribe);
+            });
+        }
+        function subAdd(id) {
+            const url = "/subscribe/add/" + id
+            const jumlah = $("#jumlah").val()
+
+            $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    jumlah: jumlah
+                },
+                success: function(response) {
+                    swal({
+                        title: "Success",
+                        text: 'Produk ditambahkan ke daftar langganan',
+                        type: "success",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: false,
+                    })
+                    console.log('success langganan product');
+                }
+            })
+        }
+        function subDelete(id) {
+            const url = "/subscribe/delete/" + id
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function(response) {
+                    swal({
+                        title: "Dihapus",
+                        text: 'Produk dihapus dari Langganan!',
+                        type: "success",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: false,
+                    })
+                    console.log('langganan / produk berhasil dihapus');
+                    tableSub();
+                }
+            })
+        }
+        
+        function subUpdate(id) {
+            const url = "/subscribe/update/" + id
+            const jumlah = document.getElementById("jumlah" + id).value;
+            $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    jumlah: jumlah
+                },
+                success: function(response) {
+                    console.log('product / subs berhasil diupdate');
+                    tableSub();
+                }
+            })
+        }
+        
         cartCount();
     </script>
 

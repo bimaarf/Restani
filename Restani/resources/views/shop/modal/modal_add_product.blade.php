@@ -85,7 +85,7 @@
         html += '</div>';
         html += '</div>';
         $('#newRow').append(html);
-        if (i > 7) {
+        if (i > 5) {
             console.log('lebih');
             $('#inc').attr('disabled', true);
         }

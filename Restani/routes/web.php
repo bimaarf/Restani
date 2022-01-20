@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +48,10 @@ Route::get('/booking/elements', [BookingController::class, 'bookElement'])->name
 Route::get('/booking/add/{id}', [BookingController::class, 'addBook'])->name('shop.addBook');  // add
 Route::get('/booking/delete/{id}', [BookingController::class, 'deleteBook'])->name('shop.elements.bookDelete'); //delete
 Route::get('/booking/update/{id}', [BookingController::class, 'updateBook'])->name('shop.updateBook'); // update
+
+// subscribve
+Route::get('/subscribe', [SubscribeController::class, 'sub'])->name('shop.subscribe'); //index
+Route::get('/subscribe/elements', [SubscribeController::class, 'subElement'])->name('shop.elements.subscribe'); //elements
+Route::get('/subscribe/add/{id}', [SubscribeController::class, 'addSub'])->name('shop.addSub');  // add
+Route::get('/subscribe/delete/{id}', [SubscribeController::class, 'deleteSub'])->name('shop.elements.subDelete'); //delete
+Route::get('/subscribe/update/{id}', [SubscribeController::class, 'updateSub'])->name('shop.updateSub'); // update

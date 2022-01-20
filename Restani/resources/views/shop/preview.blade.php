@@ -91,6 +91,9 @@
                         <button onclick="bookAdd({{ $product->id }})"
                             class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
                             type="submit">Re-Booking</button>
+                        <button onclick="subAdd({{ $product->id }})"
+                            class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
+                            type="submit">Langganan</button>
                         <input class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right" type="submit"
                             value="Beli Sekarang">
 
