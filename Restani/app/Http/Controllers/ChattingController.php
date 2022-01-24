@@ -15,35 +15,44 @@ class ChattingController extends Controller
     {
         if (Auth::user()->hasRole('user')) {
 
-            $rooms = Room::where('user_id', Auth::id())->get();
+            $rooms = Room::where('user_id', Auth::id())
+                            ->orderBy('id', 'DESC')    
+                            ->get();
         }if (Auth::user()->hasRole('mitra')) {
 
-            $rooms = Room::where('mitra_id', Auth::id())->get();
+            $rooms = Room::where('mitra_id', Auth::id())
+                            ->orderBy('id', 'DESC')    
+                            ->get();
         }
-        
-        $room = $request->session()->get('room');
+        $rooma = $request->session()->get('rooma');
         
         $users = User::orderBy('id', 'DESC')->get();
         $chats = Chatting::get();
 
-        return view('chats.index', compact('rooms', 'chats', 'users', 'room'));
+        return view('chats.index', compact('rooms', 'chats', 'users', 'rooma'));
     }
     public function addRoom(Request $request)
     {
-
         $filters    = Room::where('user_id', Auth::id())
                             ->where('mitra_id', $request->user_id)
                             ->get();
-        foreach($filters as $filter){}
+                            $request->session()->forget('rooma');
         if(count($filters) > 0) {
+            session()->regenerate();
+
+            $rooma                           = new Room();
+            $rooma['user_id']               = Auth::id();
+            $rooma['mitra_id']               = $request->user_id;
+            $request->session()->put('rooma', $rooma);
             return redirect()->route('chats.index');
         } else {
-            $room               = new Room();
+            $rooma               = new Room();
+            session()->regenerate();
+            $rooma['user_id']               = Auth::id();
+            $rooma['mitra_id']               = $request->user_id;
+            $request->session()->put('rooma', $rooma);
 
-            $request->session()->get('room', $room);
-            $room['user_id']                = Auth::id();
-            $request->session()->put('room', $room);
-
+            $room              = new Room();
             $room->user_id      = Auth::id();
             $room->mitra_id     = $request->user_id;
             $room->save();

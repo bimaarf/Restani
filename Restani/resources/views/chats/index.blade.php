@@ -3,18 +3,22 @@
     <div class="container mt-4">
         <div class="card" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
             <div class="row">
-                <div class="col-lg-3 d-lg-block bg-success" id="user-list" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
+                <div class="col-lg-3 d-lg-block bg-success" id="user-list"
+                    style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
                     <ul class="list-unstyled overflow-y-scroll" style="position: relative; height: 600px;">
                         @foreach ($rooms as $room)
 
-                            <li id="select{{ $room->id }}" onclick="target({{ $room->id }})" class="p-2 ml-4 my-4 border"
+                            <li id="select{{ $room->id }}" onclick="target({{ $room->id }})"
+                                class="p-2 ml-4 my-4 border"
                                 style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; ">
                                 @if (Auth::user()->hasRole('user'))
 
                                     @foreach ($users->where('id', $room->mitra_id) as $user)
-                                        <a href="#"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail"
-                                                width="50" alt="avatar">
-                                            <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}" value="{{ $user->name }}">
+                                        <a href="#"><img
+                                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                                class=" rounded-circle img-thumbnail" width="50" alt="avatar">
+                                            <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}"
+                                                value="{{ $user->name }}">
                                             <span class="h6 ml-4 text-white text-capitalize">{{ $user->name }}</span>
                                         </a>
                                     @endforeach
@@ -22,9 +26,11 @@
                                 @if (Auth::user()->hasRole('mitra'))
 
                                     @foreach ($users->where('id', $room->user_id) as $user)
-                                        <a href="#"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail"
-                                                width="50" alt="avatar">
-                                                <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}" value="{{ $user->name }}">
+                                        <a href="#"><img
+                                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                                class=" rounded-circle img-thumbnail" width="50" alt="avatar">
+                                            <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}"
+                                                value="{{ $user->name }}">
                                             <span class="h6 ml-4 text-white text-capitalize">{{ $user->name }}</span>
                                         </a>
                                     @endforeach
@@ -37,9 +43,21 @@
                 </div>
                 <div class="col-lg-9 d-sm-block collapse d-lg-block" id="chat-list">
                     <div class="card-header">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail" width="50" alt="avatar">
-                        <span class="h6 ml-4" id="title"></span>
-                        <span class="fa fa-bars d-sm-block d-lg-none fa-pull-right d-flex align-middle mt-3" onclick="sunting()"></span>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                            class=" rounded-circle img-thumbnail" width="50" alt="avatar">
+                        @if (session()->has('rooma'))
+
+                            <span class="h6 ml-4 text-capitalize" id="title">
+                                @foreach ($users->where('id', $rooma['mitra_id']) as $usr)
+                                    {{ $usr->name }}
+                                @endforeach
+                            </span>
+
+                        @else
+                            <span class="h6 ml-4" id="title"></span>
+                        @endif
+                        <span class="fa fa-bars d-sm-block d-lg-none fa-pull-right d-flex align-middle mt-3"
+                            onclick="sunting()"></span>
                     </div>
                     <div class="card-body">
                         <div class="pt-3 pe-3 overflow-scroll" id="box" data-mdb-perfect-scrollbar="true"
@@ -56,12 +74,12 @@
                             <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>
-                            @if (session()->has('room'))
-                                
-                            <input type="text" id="target-user" name="room_id" value="{{ $room['id'] }}">
-                            @else 
+                        @if (session()->has('rooma'))
+
+                            <input type="text" id="target-user" name="room_id" value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }}@endforeach">
+                        @else
                             <input type="text" id="target-user" name="room_id" value="">
-                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
@@ -71,6 +89,7 @@
 
 <script>
     var condition = true;
+
     function box(id) {
 
         const url = "/chatting/box/" + id
@@ -88,6 +107,7 @@
             });
             // end scroll
 
+
         });
     }
 
@@ -95,14 +115,16 @@
     function target(id) {
 
         const target = $("#target-user").val(id);
-        const title = $("#reqTit"+id).val();
+        const title = $("#reqTit" + id).val();
 
         document.getElementById('title').innerHTML = title;
         document.getElementById('title').style.textTransform = "capitalize";
         $("#target-user").val(id);
         sunting()
+        box(id);
 
-        box(id)
+
+
         // document.getElementById("select" + id).style.background = 'rgb(3, 94, 56)';
     }
 
@@ -121,21 +143,22 @@
                 $("#chatq").val('');
                 box(target);
 
-            }, error: function(response) {
+            },
+            error: function(response) {
                 alert('Pesan tidak boleh kosong!');
             }
         })
     }
 
-    function sunting(){
-        if(condition == true){
-            $('#user-list').addClass  ('d-sm-none collapse')
-            $('#chat-list').removeClass ('d-sm-block collapse')
+    function sunting() {
+        if (condition == true) {
+            $('#user-list').addClass('d-sm-none collapse')
+            $('#chat-list').removeClass('d-sm-block collapse')
             condition = false;
 
-        }else if(condition == false){
+        } else if (condition == false) {
             $('#user-list').removeClass('d-sm-block collapse')
-            $('#chat-list').addClass ('d-sm-none collapse')
+            $('#chat-list').addClass('d-sm-none collapse')
             condition = true;
         }
         console.log(condition);

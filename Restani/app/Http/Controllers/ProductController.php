@@ -12,7 +12,6 @@ class ProductController extends Controller
 {
     public function shop()
     {
-        
         $category   = Category::all();
         return view('shop.product', compact('category'));
     }
