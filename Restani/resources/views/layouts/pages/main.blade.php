@@ -362,7 +362,10 @@
         favCount();
         cartCount();
         chatCount();
+        
     </script>
+   
+    
 
 </body>
 

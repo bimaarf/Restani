@@ -29,69 +29,33 @@
             </div>
             <div class="card-body align-middle d-flex justify-content-between">
                 <div class="row">
-                    {{-- loop --}}
-                    <div class="col-lg-4 mt-1">
-                        <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                            class="img-fluid rounded-4" alt="">
-                    </div>
-                    <div class="col-lg-8 mt-1">
-                        <div class="mt-n2">
-                            <small style="font-size: 12px;">Paket Hemat</small>
+                    @foreach ($product->slice(0, 3) as $prod)
+
+                        {{-- loop --}}
+                        <div class="col-lg-4 mb-2">
+                            <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
+                                class="img-fluid rounded-4" alt=""
+                                style="width:200px; height: 60px; object-position: center;overflow: hidden;object-fit: cover;">
                         </div>
-                        <div class="mt-n2">
-                            <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star" style="font-size: 12px;"></span>
+                        <div class="col-lg-8 mt-2">
+                            <div class="mt-n2">
+                                <small style="font-size: 12px;">{{ Str::limit($prod->title, 20) }}</small>
+                            </div>
+                            <div class="mt-n1">
+                                <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                <span class="fa fa-star" style="font-size: 12px;"></span>
+                            </div>
+                            <div class="mt-n1">
+                                <small class="text-success fw-bold" style="font-size: 12px;">Rp
+                                    {{ $prod->harga }}</small>
+                            </div>
                         </div>
-                        <div class="mt-n2">
-                            <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                        </div>
-                    </div>
-                    <!-- break -->
-                    {{-- loop --}}
-                    <div class="col-lg-4 mt-1">
-                        <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                            class="img-fluid rounded-4" alt="">
-                    </div>
-                    <div class="col-lg-8 mt-1">
-                        <div class="mt-n2">
-                            <small style="font-size: 12px;">Paket Hemat</small>
-                        </div>
-                        <div class="mt-n2">
-                            <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star" style="font-size: 12px;"></span>
-                        </div>
-                        <div class="mt-n2">
-                            <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                        </div>
-                    </div>
-                    <!-- break -->
-                    {{-- loop --}}
-                    <div class="col-lg-4 mt-1">
-                        <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                            class="img-fluid rounded-4" alt="">
-                    </div>
-                    <div class="col-lg-8 mt-1">
-                        <div class="mt-n2">
-                            <small style="font-size: 12px;">Paket Hemat</small>
-                        </div>
-                        <div class="mt-n2">
-                            <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                            <span class="fa fa-star" style="font-size: 12px;"></span>
-                        </div>
-                        <div class="mt-n2">
-                            <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                        </div>
-                    </div>
-                    <!-- break -->
+                        <!-- break -->
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -100,21 +64,26 @@
         <img src="{{ asset('assets/icon/label.png') }}" class="img-fluid" alt="">
         <div class="row my-4">
             <div class="col-4">
-                <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Tambah
-                    Produk</button>
+                @if (Auth::user()->hasRole('mitra'))
+                    <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Tambah
+                        Produk</button>
+                @endif
             </div>
             <div class="col-8">
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Cari Produk" aria-label="Search"
+                <form action="{{ route('shop.tag') }}">
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" name="title" placeholder="Cari Produk" aria-label="Search" value="{{ request('title') }}"
                         aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
         <div class="row">
+            
             @foreach ($product as $prod)
                 <div class="col-lg-3 col-6 mt-2">
                     <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
@@ -126,22 +95,24 @@
                             <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden" value="1"
                                 name="jumlah" id="jumlah">
                             <a href="#add" onclick="cartAdd({{ $prod->id }})"><i
-                                    class="fa fa-plus-circle text-success fa-pull-right"></i></a>
+                                    class="fa fa-plus-circle text-success position-absolute"
+                                    style="right: 10px; top: 10px"></i></a>
+
                             <a href="{{ route('shop.preview', ['slug' => $prod->slug]) }}">
 
-                                <p class="card-text text-body mt-n3 fw-bold">
-                                    {{ Str::limit($prod->title, 25) }}
+                                <p class="card-text text-body mt-n3 fw-bold small">
+                                    {{ Str::limit($prod->title, 20) }}
                                 </p>
-                                <p class="card-text text-primary small text-success mt-n3 fw-bold">
+                                <p class="card-text text-primary small text-success mt-n3 small fw-bold">
                                     Rp {{ $prod->harga }}
                                 </p>
                             </a>
                             <div class="mt-n1">
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star" style="font-size: 12px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
                             </div>
                         </div>
                     </div>

@@ -18,14 +18,23 @@ class ProductController extends Controller
     }
     public function tag(Request $request)
     {
+        $notFound = '';
         if($request->has(['search'])) {
             $product    = Product::where('kategori_id', 'LIKE', '%'.$request->search. '%')
                                     ->orderBy('id', 'DESC')->get();
-        }else {
-            $product    = Product::orderBy('id', 'DESC')->get();
         }
+        
+        if ($request->has(['title'])) { 
+            $product    = Product::where('title', 'LIKE', '%'.$request->title. '%')
+                                    ->orderBy('id', 'DESC')->get();
+            // $product    = Product::orderBy('id', 'DESC')->get();
+        }else {
+            $notFound = 'Produk yg anda cari tidak tersedia 😇';
+        }
+        
+        $productLaris    = Product::orderBy('id', 'DESC')->get();
         $category   = Category::all();
-        return view('shop.tag', compact('product', 'category'));
+        return view('shop.tag', compact('product', 'category', 'productLaris', 'notFound'));
     }
     public function shopElement()
     {

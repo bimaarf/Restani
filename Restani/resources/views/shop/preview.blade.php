@@ -76,7 +76,7 @@
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                 class="minus text-black-50 border" style="height: 30px ; width: 20px"></button>
 
-                            <input id="jumlah" class="text-center border" min="1" name="quantity" value="1" type="number"
+                            <input id="jumlah" class="text-center border" min="1" max="{{ $product->stok }}" name="quantity" value="1" type="number"
                                 style="width: 60px; height: 30px;" disabled>
 
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
