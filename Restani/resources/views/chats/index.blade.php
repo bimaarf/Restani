@@ -56,7 +56,12 @@
                             <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>
-                        <input type="hidden" id="target-user" name="room_id" value="">
+                            @if (session()->has('room'))
+                                
+                            <input type="text" id="target-user" name="room_id" value="{{ $room['id'] }}">
+                            @else 
+                            <input type="text" id="target-user" name="room_id" value="">
+                            @endif
                     </div>
                 </div>
             </div>

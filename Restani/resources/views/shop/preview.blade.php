@@ -108,7 +108,7 @@
                                 <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
                                 <input type="hidden" name="user_id" value="{{ $product->user->id }}">
                                 <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
-                                @if (Auth::user()->hasRole('user|mitra'))
+                                @if (Auth::user()->hasRole('user'))
 
                                     <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
                                         Petani </button>
