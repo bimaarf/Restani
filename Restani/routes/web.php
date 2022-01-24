@@ -32,7 +32,7 @@ Route::get('/shop/tag', [ProductController::class, 'tag'])->name('shop.tag'); //
 
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop.product'); //index
 Route::get('/shop/elements', [ProductController::class, 'shopElement'])->name('shop.elements.product'); //elements
-Route::get('/shop/v/{slug}', [ProductController::class, 'preview'])->name('shop.preview');
+Route::get('/shop/v/{key}', [ProductController::class, 'preview'])->name('shop.preview');
 Route::post('/product/store', [ProductController::class, 'store'])->name('shop.store')->middleware('auth');
 
 Route::get('/cart/count', [CartController::class, 'sum'])->name('shop.elements.countCart'); //cart count

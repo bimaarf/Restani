@@ -98,7 +98,7 @@
                                     class="fa fa-plus-circle text-success position-absolute"
                                     style="right: 10px; top: 10px"></i></a>
 
-                            <a href="{{ route('shop.preview', ['slug' => $prod->slug]) }}">
+                            <a href="{{ route('shop.preview', ['key'=>$prod->key]) }}">
 
                                 <p class="card-text text-body mt-n3 fw-bold small">
                                     {{ Str::limit($prod->title, 20) }}

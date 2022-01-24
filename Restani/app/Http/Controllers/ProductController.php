@@ -44,10 +44,11 @@ class ProductController extends Controller
         return view('shop.elements.product', compact('category', 'product'));
     }
     
-    public function preview($slug)
+    public function preview($key)
     {
         $num = 0;
-        $product    = Product::where('slug', $slug)->first();
+        $product    = Product::where('key', $key)
+                                ->first();
         $favo       = Favorite::where('product_id', $product->id)->get();
         if (count($favo) > 0) {
             $num = 1;
@@ -66,6 +67,7 @@ class ProductController extends Controller
         $product                    = new Product();
         $product->title             = $request->title;
         $product->slug              = Str::slug($request->title);
+        $product->key               = Str::random(30);
         $product->desc              = $request->desc;
         $product->harga             = $request->harga;
         $product->stok              = $request->stok;

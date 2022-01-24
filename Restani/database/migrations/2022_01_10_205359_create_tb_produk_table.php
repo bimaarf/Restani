@@ -17,6 +17,7 @@ class CreateTbProdukTable extends Migration
             $table->id();
             $table->string('title', 255);
             $table->string('slug', 255);
+            $table->string('key', 255);
             $table->text('desc');
             $table->string('harga', 255);
             $table->string('stok', 255);

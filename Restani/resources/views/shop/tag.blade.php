@@ -99,7 +99,7 @@
                                             value="1" name="jumlah" id="jumlah">
                                         <a href="#add" onclick="cartAdd({{ $prod->id }})"><i
                                                 class="fa fa-plus-circle text-success fa-pull-right"></i></a>
-                                        <a href="{{ route('shop.preview', ['slug' => $prod->slug]) }}">
+                                        <a href="{{ route('shop.preview', ['key' => $prod->key]) }}">
 
                                             <p class="card-text text-body mt-n3 fw-bold">
                                                 {{ Str::limit($prod->title, 25) }}

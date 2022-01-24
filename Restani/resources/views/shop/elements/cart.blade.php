@@ -77,16 +77,16 @@
                     ?>
                 <div class="col-4">
                     <a href="#">
-                        <img src="{{ asset('product/' . $decode[0]) }}" class="img-fluid img-thumbnail rounded-6"
+                        <img src="{{ asset('product/' . $decode[0]) }}" class="img-fluid rounded"
                             alt=""
-                            style="height: 90px;width:130px;object-position: center;overflow: hidden;object-fit: cover;">
+                            style="height: 60px;width:130px;object-position: center;overflow: hidden;object-fit: cover;">
                     </a>
 
-                    <p class="text-success fw-bold mt-4"><span>Rp {{ $cart->total }}</span></p>
+                    <p class="text-success fw-bold mt-4 "><span>Rp {{ $cart->total }}</span></p>
                 </div>
                 <?php } ?>
                 <div class="col-8 align-self-center">
-                    <div class="float-right">
+                    <div class="position-absolute" style="right: 0">
                         <a class="mx-1" onclick="cartDelete({{ $cart->id }})" href="#"><i
                                 class="fa fa-trash link-danger"></i></a>
                     </div>
