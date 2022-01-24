@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -36,8 +37,15 @@ class ProductController extends Controller
     
     public function preview($slug)
     {
+        $num = 0;
         $product    = Product::where('slug', $slug)->first();
-        return view('shop.preview', compact('product'));
+        $favo       = Favorite::where('product_id', $product->id)->get();
+        if (count($favo) > 0) {
+            $num = 1;
+        }else {
+            $num = 0;
+        }
+        return view('shop.preview', compact('product', 'favo', 'num'));
     }
     public function store(Request $request)
     {

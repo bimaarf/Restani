@@ -35,8 +35,6 @@
     <header>
         <!-- Intro settings -->
         <style>
-
-            
             /* Default height for small devices */
             #intro-example {
                 height: 400px;
@@ -56,7 +54,7 @@
     </header>
     @if (Session::has('sweet_alert.alert'))
         <script>
-            swal({!! Session::get('sweet_alert.alert') !!}); 
+            swal({!! Session::get('sweet_alert.alert') !!});
         </script>
     @endif
     <div class="container mt-2">
@@ -83,7 +81,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-       
         function shopElement() {
             const url = "{{ route('shop.elements.product') }}"
             $.get(url, {}, function(bookings, status) {
@@ -261,6 +258,7 @@
                 $(query).html(subscribe);
             });
         }
+
         function subAdd(id) {
             const url = "/subscribe/add/" + id
             const jumlah = $("#jumlah").val()
@@ -284,10 +282,11 @@
                 }
             })
         }
+
         function subDelete(id) {
             const url = "/subscribe/delete/" + id
             $.ajax({
-                url: url, 
+                url: url,
                 type: "get",
                 success: function(response) {
                     swal({
@@ -303,7 +302,7 @@
                 }
             })
         }
-        
+
         function subUpdate(id) {
             const url = "/subscribe/update/" + id
             const jumlah = document.getElementById("jumlah" + id).value;
@@ -319,9 +318,50 @@
                 }
             })
         }
-        
+
+        function favShow(id) {
+            const url = "/favorite/show/" + id
+            $.get(url, {}, function(product, status) {
+                const query = "#favorite"
+                $(query).html(product);
+            });
+        }
+       
+        function favAdd(id) {
+            const url = "/favorite/add/" + id
+            const formAdd = $("fav-add"+id).val()
+
+            $('.btn').attr('disabled', true);
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response) {
+                    favShow(id);
+                    favCount();
+                    console.log('produk fav added');
+                    $('.btn').attr('disabled', false);
+                }
+            })
+        }
+        function favDel(id) {
+            const url = "/favorite/delete/" + id
+            const formDell = $("fav-del"+id).val()
+
+            $('.btn').attr('disabled', true);
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response) {
+                    favShow(id);
+                    favCount();
+                    console.log('produk fav deleted');
+                    $('.btn').attr('disabled', false);
+                }
+            })
+        }
+        favCount();
         cartCount();
-        chatCount();        
+        chatCount();
     </script>
 
 </body>

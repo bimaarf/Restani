@@ -55,7 +55,8 @@
                     </div>
                     <p class="h5 text-success">Rp {{ $product->harga }}</p>
                 </div>
-                <a href="#!love" class="far fa-heart bg-primary rounded-circle p-3 text-white float-right mt-n2"></a>
+               <div id="favorite"></div>
+
                 <br><br><br><br><br>
                 @if ($product->stok > 0)
                     <i class="fa fa-check bg-success text-white rounded-circle p-1"></i> <span
@@ -108,9 +109,9 @@
                                 <input type="hidden" name="user_id" value="{{ $product->user->id }}">
                                 <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
                                 @if (Auth::user()->hasRole('user|mitra'))
-                                    
-                                <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
-                                    Petani </button>
+
+                                    <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
+                                        Petani </button>
                                 @endif
 
                             </form>
@@ -297,6 +298,10 @@
             e.preventDefault()
             ''
         })
+        const product_id = '{{ $product->id }}';
+        window.onload = function() {
+            favShow(product_id);
+        }
     </script>
 
 @endsection

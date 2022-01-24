@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChattingController;
+use App\Http\Controllers\FavController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,6 @@ Route::get('/cart/add/{id}', [CartController::class, 'addCart'])->name('shop.add
 Route::get('/cart/update/{id}', [CartController::class, 'updateCart'])->name('shop.updateCart'); // update
 
 // booking
-
 Route::get('/booking', [BookingController::class, 'booking'])->name('shop.booking'); //index
 Route::get('/booking/elements', [BookingController::class, 'bookElement'])->name('shop.elements.booking'); //elements
 Route::get('/booking/add/{id}', [BookingController::class, 'addBook'])->name('shop.addBook');  // add
@@ -58,12 +58,17 @@ Route::get('/subscribe/delete/{id}', [SubscribeController::class, 'deleteSub'])-
 Route::get('/subscribe/update/{id}', [SubscribeController::class, 'updateSub'])->name('shop.updateSub'); // update
 
 // chatting
-
 Route::get('/chatting', [ChattingController::class, 'index'])->name('chats.index'); //index
 Route::get('/chatting/box/{id}', [ChattingController::class, 'box'])->name('chats.elements.box'); //index
 Route::get('/chatting/store', [ChattingController::class, 'store'])->name('chats.store');  // add
 
 // room
 Route::get('/room/add/', [ChattingController::class, 'addRoom'])->name('chats.addRomm');  // add
-
 Route::get('/room/count', [ChattingController::class, 'sum'])->name('chats.elements.countChat'); //chat count
+
+// favo product
+Route::get('/favorite', [FavController::class, 'index'])->name('shop.favorite');  // show elements
+Route::get('/favorite/show/{id}', [FavController::class, 'showFav'])->name('shop.elements.favorite');  // show elements
+Route::get('/favorite/add/{id}', [FavController::class, 'addFav'])->name('shop.addFav');  // add
+Route::get('/favorite/delete/{id}', [FavController::class, 'delFav'])->name('shop.delFav');  // add
+Route::get('/favorite/count', [FavController::class, 'sum'])->name('shop.elements.countFav'); //fav count
