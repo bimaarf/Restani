@@ -45,12 +45,12 @@
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
-        <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-4"><span
+        <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-2"><span
                 class="badge rounded-pill badge-notification bg-danger" id="chat" style="display: none">0</span></a>
         <a href="#" class="fa fa-heart mx-4"><span class="badge rounded-pill badge-notification bg-danger">1</span></a>
-        <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-4"><span
+        <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-2"><span
                 class="badge rounded-pill badge-notification bg-danger" id="cart" style="display: none">0</span></a>
-        <div class="align-items-center border-left d-lg-flex collapse">
+        <div class="align-items-center border-left ml-2 d-lg-flex collapse">
             @if (Auth::check())
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

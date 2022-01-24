@@ -1,4 +1,4 @@
-{{ $chats[0]->room_id}}
+{{-- {{ $chats[0]->room_id}} --}}
 <div id="hides{{ $chats[0]->room_id}}" class="d-block" >
         @foreach ($chats as $chat)
 

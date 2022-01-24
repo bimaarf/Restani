@@ -3,7 +3,7 @@
     <div class="container mt-4">
         <div class="card" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
             <div class="row">
-                <div class="col-lg-3 bg-success" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
+                <div class="col-lg-3 d-lg-block bg-success" id="user-list" style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
                     <ul class="list-unstyled overflow-y-scroll" style="position: relative; height: 600px;">
                         @foreach ($rooms as $room)
 
@@ -35,10 +35,11 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 d-sm-block collapse d-lg-block" id="chat-list">
                     <div class="card-header">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail" width="50" alt="avatar">
                         <span class="h6 ml-4" id="title"></span>
+                        <span class="fa fa-bars d-sm-block d-lg-none fa-pull-right d-flex align-middle mt-3" onclick="sunting()"></span>
                     </div>
                     <div class="card-body">
                         <div class="pt-3 pe-3 overflow-scroll" id="box" data-mdb-perfect-scrollbar="true"
@@ -55,7 +56,7 @@
                             <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>
-                        <input type="text" id="target-user" name="room_id" value="">
+                        <input type="hidden" id="target-user" name="room_id" value="">
                     </div>
                 </div>
             </div>
@@ -64,6 +65,7 @@
 @endsection
 
 <script>
+    var condition = true;
     function box(id) {
 
         const url = "/chatting/box/" + id
@@ -93,6 +95,7 @@
         document.getElementById('title').innerHTML = title;
         document.getElementById('title').style.textTransform = "capitalize";
         $("#target-user").val(id);
+        sunting()
 
         box(id)
         // document.getElementById("select" + id).style.background = 'rgb(3, 94, 56)';
@@ -117,5 +120,20 @@
                 alert('Pesan tidak boleh kosong!');
             }
         })
+    }
+
+    function sunting(){
+        if(condition == true){
+            $('#user-list').addClass  ('d-sm-none collapse')
+            $('#chat-list').removeClass ('d-sm-block collapse')
+            condition = false;
+
+        }else if(condition == false){
+            $('#user-list').removeClass('d-sm-block collapse')
+            $('#chat-list').addClass ('d-sm-none collapse')
+            condition = true;
+        }
+        console.log(condition);
+
     }
 </script>
