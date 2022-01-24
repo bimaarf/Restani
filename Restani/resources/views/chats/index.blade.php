@@ -7,14 +7,14 @@
                     <ul class="list-unstyled overflow-y-scroll" style="position: relative; height: 600px;">
                         @foreach ($rooms as $room)
 
-                            <li id="select{{ $room->id }}" onclick="target({{ $room->id }})" class="p-2 ml-4 my-4"
+                            <li id="select{{ $room->id }}" onclick="target({{ $room->id }})" class="p-2 ml-4 my-4 border"
                                 style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; ">
                                 @if (Auth::user()->hasRole('user'))
 
                                     @foreach ($users->where('id', $room->mitra_id) as $user)
-                                        <a href="#"><img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail"
+                                        <a href="#"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail"
                                                 width="50" alt="avatar">
-
+                                            <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}" value="{{ $user->name }}">
                                             <span class="h6 ml-4 text-white text-capitalize">{{ $user->name }}</span>
                                         </a>
                                     @endforeach
@@ -22,9 +22,9 @@
                                 @if (Auth::user()->hasRole('mitra'))
 
                                     @foreach ($users->where('id', $room->user_id) as $user)
-                                        <a href="#"><img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail"
+                                        <a href="#"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail"
                                                 width="50" alt="avatar">
-
+                                                <input class="text-capitalize" type="hidden" id="reqTit{{ $room->id }}" value="{{ $user->name }}">
                                             <span class="h6 ml-4 text-white text-capitalize">{{ $user->name }}</span>
                                         </a>
                                     @endforeach
@@ -37,8 +37,8 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="card-header">
-                        <img src="assets/icon/Driver.svg" class=" rounded-circle img-thumbnail" width="50" alt="avatar">
-                        <span class="h6 ml-4">Joe Sandi</span>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" class=" rounded-circle img-thumbnail" width="50" alt="avatar">
+                        <span class="h6 ml-4" id="title"></span>
                     </div>
                     <div class="card-body">
                         <div class="pt-3 pe-3 overflow-scroll" id="box" data-mdb-perfect-scrollbar="true"
@@ -55,7 +55,7 @@
                             <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>
-                        <input type="text" id="target-user" name="room_id" value="1">
+                        <input type="text" id="target-user" name="room_id" value="">
                     </div>
                 </div>
             </div>
@@ -88,11 +88,13 @@
     function target(id) {
 
         const target = $("#target-user").val(id);
+        const title = $("#reqTit"+id).val();
+
+        document.getElementById('title').innerHTML = title;
+        document.getElementById('title').style.textTransform = "capitalize";
         $("#target-user").val(id);
 
         box(id)
-        console.log(id);
-
         // document.getElementById("select" + id).style.background = 'rgb(3, 94, 56)';
     }
 
@@ -109,8 +111,6 @@
             },
             success: function(response) {
                 $("#chatq").val('');
-                console.log(chat, target);
-              
                 box(target);
 
             }, error: function(response) {
