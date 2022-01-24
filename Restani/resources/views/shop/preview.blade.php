@@ -84,29 +84,33 @@
 
                     </div>
 
-                        <button onclick="cartAdd({{ $product->id }})"
-                            class="btn btn-success rounded my-1 mx-4 text-capitalize float-right" type="submit"> <i
-                                class="fa fa-shopping-cart"></i><span class="d-lg-inline collapse"> Masukkan
-                                Keranjang</span></button>
-                        <button onclick="bookAdd({{ $product->id }})"
-                            class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
-                            type="submit">Re-Booking</button>
-                        <button onclick="subAdd({{ $product->id }})"
-                            class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
-                            type="submit">Langganan</button>
-                        <input class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right" type="submit"
-                            value="Beli Sekarang">
+                    <button onclick="cartAdd({{ $product->id }})"
+                        class="btn btn-success rounded my-1 mx-4 text-capitalize float-right" type="submit"> <i
+                            class="fa fa-shopping-cart"></i><span class="d-lg-inline collapse"> Masukkan
+                            Keranjang</span></button>
+                    <button onclick="bookAdd({{ $product->id }})"
+                        class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
+                        type="submit">Re-Booking</button>
+                    <button onclick="subAdd({{ $product->id }})"
+                        class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
+                        type="submit">Langganan</button>
+                    <input class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right" type="submit"
+                        value="Beli Sekarang">
 
                 </div>
                 <div class="float-left mt-4">
 
                     <div class="card my-4">
                         <div class="card-body">
-                            <img src="{{ asset('assets/img/landing/aman.png') }}" width="40" alt="">
-                            <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
-                            <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
-                            <a href="#" class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
-                                Petani</a>
+                            <form action="{{ route('chats.addRomm') }}" method="get">
+                                <img src="{{ asset('assets/img/landing/aman.png') }}" width="40" alt="">
+                                <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
+                                <input type="hidden" name="user_id" value="{{ $product->user->id }}">
+                                <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
+                                <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
+                                    Petani </button>
+
+                            </form>
                         </div>
                     </div>
                     <div class="form-group">

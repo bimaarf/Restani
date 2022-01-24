@@ -45,8 +45,8 @@
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
-        <a href="#" class="fa fa-comment-dots mx-4"><span
-                class="badge rounded-pill badge-notification bg-danger">1</span></a>
+        <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-4"><span
+                class="badge rounded-pill badge-notification bg-danger" id="chat" style="display: none">0</span></a>
         <a href="#" class="fa fa-heart mx-4"><span class="badge rounded-pill badge-notification bg-danger">1</span></a>
         <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-4"><span
                 class="badge rounded-pill badge-notification bg-danger" id="cart" style="display: none">0</span></a>
@@ -81,7 +81,21 @@
             }
         });
     }
+    function chatCount() {
+        const url = "{{ route('chats.elements.countChat') }}";
+        $.get(url, {}, function(checkouts, status) {
+            const query = "#chat"
+            
+            $(query).html(checkouts);
+            if(checkouts == 0) {
+                document.getElementById('chat').style.display = 'none';
+            }else{
+                document.getElementById('chat').style.display = 'inline';
+            }
+        });
+    }
     window.onload = function() {
         cartCount();
+        chatCount();
     }
 </script>

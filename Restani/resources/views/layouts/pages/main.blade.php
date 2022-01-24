@@ -35,6 +35,8 @@
     <header>
         <!-- Intro settings -->
         <style>
+
+            
             /* Default height for small devices */
             #intro-example {
                 height: 400px;
@@ -54,7 +56,7 @@
     </header>
     @if (Session::has('sweet_alert.alert'))
         <script>
-            swal({!! Session::get('sweet_alert.alert') !!});
+            swal({!! Session::get('sweet_alert.alert') !!}); 
         </script>
     @endif
     <div class="container mt-2">
@@ -285,7 +287,7 @@
         function subDelete(id) {
             const url = "/subscribe/delete/" + id
             $.ajax({
-                url: url,
+                url: url, 
                 type: "get",
                 success: function(response) {
                     swal({
@@ -319,6 +321,7 @@
         }
         
         cartCount();
+        chatCount();        
     </script>
 
 </body>

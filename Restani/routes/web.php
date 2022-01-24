@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChattingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
@@ -55,3 +56,14 @@ Route::get('/subscribe/elements', [SubscribeController::class, 'subElement'])->n
 Route::get('/subscribe/add/{id}', [SubscribeController::class, 'addSub'])->name('shop.addSub');  // add
 Route::get('/subscribe/delete/{id}', [SubscribeController::class, 'deleteSub'])->name('shop.elements.subDelete'); //delete
 Route::get('/subscribe/update/{id}', [SubscribeController::class, 'updateSub'])->name('shop.updateSub'); // update
+
+// chatting
+
+Route::get('/chatting', [ChattingController::class, 'index'])->name('chats.index'); //index
+Route::get('/chatting/box/{id}', [ChattingController::class, 'box'])->name('chats.elements.box'); //index
+Route::get('/chatting/store', [ChattingController::class, 'store'])->name('chats.store');  // add
+
+// room
+Route::get('/room/add/', [ChattingController::class, 'addRoom'])->name('chats.addRomm');  // add
+
+Route::get('/room/count', [ChattingController::class, 'sum'])->name('chats.elements.countChat'); //chat count
