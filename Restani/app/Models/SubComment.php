@@ -5,17 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chatting extends Model
+class SubComment extends Model
 {
     use HasFactory;
-    protected $table ='tb_chat';
+    protected $table = 'tb_comment_sub';
 
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
        ->diffForHumans();
     }
-    public function room(){
-        return $this->belongsTo(Room::class);
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function comment()
+    {
+        return $this->belongsTo(Comments::class);
     }
 }

@@ -359,9 +359,6 @@
                 }
             })
         }
-        favCount();
-        cartCount();
-        chatCount();
         
     </script>
    

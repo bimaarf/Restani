@@ -31,13 +31,12 @@
                 <div class="row">
                     @foreach ($product->slice(0, 3) as $prod)
 
-                        {{-- loop --}}
                         <div class="col-lg-4 mb-2">
                             <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
                                 class="img-fluid rounded-4" alt=""
                                 style="width:200px; height: 60px; object-position: center;overflow: hidden;object-fit: cover;">
                         </div>
-                        <div class="col-lg-8 mt-2">
+                        <a href="{{ route('shop.preview', ['key' => $prod->key]) }}" class="col-lg-8 mt-2">
                             <div class="mt-n2">
                                 <small style="font-size: 12px;">{{ Str::limit($prod->title, 20) }}</small>
                             </div>
@@ -52,8 +51,7 @@
                                 <small class="text-success fw-bold" style="font-size: 12px;">Rp
                                     {{ $prod->harga }}</small>
                             </div>
-                        </div>
-                        <!-- break -->
+                        </a>
                     @endforeach
 
                 </div>
@@ -64,16 +62,21 @@
         <img src="{{ asset('assets/icon/label.png') }}" class="img-fluid" alt="">
         <div class="row my-4">
             <div class="col-4">
-                @if (Auth::user()->hasRole('mitra'))
-                    <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Tambah
-                        Produk</button>
-                @endif
+                @auth
+
+                    @if (Auth::user()->hasRole('mitra'))
+                        <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Tambah
+                            Produk</button>
+                    @endif
+
+                @endauth
+
             </div>
             <div class="col-8">
                 <form action="{{ route('shop.tag') }}">
                     <div class="input-group rounded">
-                        <input type="search" class="form-control rounded" name="title" placeholder="Cari Produk" aria-label="Search" value="{{ request('title') }}"
-                        aria-describedby="search-addon" />
+                        <input type="search" class="form-control rounded" name="title" placeholder="Cari Produk"
+                            aria-label="Search" value="{{ request('title') }}" aria-describedby="search-addon" />
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i>
                         </button>
@@ -83,7 +86,7 @@
         </div>
 
         <div class="row">
-            
+
             @foreach ($product as $prod)
                 <div class="col-lg-3 col-6 mt-2">
                     <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
@@ -98,7 +101,7 @@
                                     class="fa fa-plus-circle text-success position-absolute"
                                     style="right: 10px; top: 10px"></i></a>
 
-                            <a href="{{ route('shop.preview', ['key'=>$prod->key]) }}">
+                            <a href="{{ route('shop.preview', ['key' => $prod->key]) }}">
 
                                 <p class="card-text text-body mt-n3 fw-bold small">
                                     {{ Str::limit($prod->title, 20) }}

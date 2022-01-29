@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comments;
 use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class ProductController extends Controller
     public function preview($key)
     {
         $num = 0;
+        
         $product    = Product::where('key', $key)
                                 ->first();
         $favo       = Favorite::where('product_id', $product->id)->get();

@@ -13,8 +13,9 @@ class FavController extends Controller
     public function index()
     {
         $category   = Category::all();
+        $product    = Product::orderBy('id', 'DESC')->get();
         $favorites    = Favorite::where('user_id', Auth::id())->get();
-        return view('shop.favorite', compact('category', 'favorites'));
+        return view('shop.favorite', compact('category', 'favorites', 'product'));
     }
     public function showFav($id)
     {

@@ -55,7 +55,7 @@
                     </div>
                     <p class="h5 text-success">Rp {{ $product->harga }}</p>
                 </div>
-               <div id="favorite"></div>
+                <div id="favorite"></div>
 
                 <br><br><br><br><br>
                 @if ($product->stok > 0)
@@ -76,8 +76,8 @@
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                 class="minus text-black-50 border" style="height: 30px ; width: 20px"></button>
 
-                            <input id="jumlah" class="text-center border" min="1" max="{{ $product->stok }}" name="quantity" value="1" type="number"
-                                style="width: 60px; height: 30px;" disabled>
+                            <input id="jumlah" class="text-center border" min="1" max="{{ $product->stok }}"
+                                name="quantity" value="1" type="number" style="width: 60px; height: 30px;" disabled>
 
                             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                 class="plus text-black-50 border" style="height: 30px ; width: 20px"></button>
@@ -108,11 +108,15 @@
                                 <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
                                 <input type="hidden" name="user_id" value="{{ $product->user->id }}">
                                 <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
-                                @if (Auth::user()->hasRole('user'))
+                                @auth
 
-                                    <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
-                                        Petani </button>
-                                @endif
+                                    @if (Auth::user()->hasRole('user'))
+
+                                        <button class="btn btn-outline-light text-black-50 rounded-6 text-capitalize ">Chat
+                                            Petani </button>
+                                    @endif
+                                @endauth
+
 
                             </form>
                         </div>
@@ -129,7 +133,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-capitalize fs-6 active" id="home-tab0" data-mdb-toggle="tab"
                             data-mdb-target="#home0" type="button" role="tab" aria-controls="home" aria-selected="true">
-                            Ulasan
+                            Comments
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -143,157 +147,161 @@
                 <div class="tab-content" id="myTabContent0">
                     <div class="tab-pane fade show border p-4 rounded-6 active" id="home0" role="tabpanel"
                         aria-labelledby="home-tab0">
-                        <!-- foreach -->
+                        <a href="#!" class="float-right" onclick="comment()"><i class="fas fa-reply fa-xs"></i><span
+                                class="small">
+                                Add comment</span></a>
                         <h4 class="text-center mb-4 pb-2">Komentar</h4>
-                        <div class="d-flex flex-start">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="40"
-                                height="40" />
-                            <div class="flex-grow-1 flex-shrink-1">
-                                <div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="mb-1">
-                                            Maria Smantha <span class="small">- 2 hours ago</span>
-                                        </p>
-                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
-                                                reply</span></a>
-                                    </div>
-                                    <p class="small mb-0">
-                                        It is a long established fact that a reader will be distracted by
-                                        the readable content of a page.
-                                    </p>
-                                </div>
+                        <form id="form-comment" class="input-group my-4"
+                            action="{{ route('comment.store', ['id' => $product->id]) }}">
+                            <input id="message" type="text" value="" maxlength="250"
+                                class="form-control border-0 border-bottom" name="message" placeholder='Ketikkan komentar..'
+                                style="border-color: inherit;
+                                                                -webkit-box-shadow: none;
+                                                                box-shadow: none;">
 
-                                <div class="d-flex flex-start mt-4">
-                                    <a class="me-3" href="#">
-                                        <img class="rounded-circle shadow-1-strong"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
-                                            width="30" height="30" />
-                                    </a>
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
-                                                    Simona Disa <span class="small">- 3 hours ago</span>
-                                                </p>
-                                            </div>
-                                            <p class="small mb-0">
-                                                letters, as opposed to using 'Content here, content here',
-                                                making it look like readable English.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-start mt-4">
-                                    <a class="me-3" href="#">
-                                        <img class="rounded-circle shadow-1-strong"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                                            width="30" height="30" />
-                                    </a>
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
-                                                    John Smith <span class="small">- 4 hours ago</span>
-                                                </p>
-                                            </div>
-                                            <p class="small mb-0">
-                                                the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- foreach -->
-                        <div class="d-flex flex-start">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="40"
-                                height="40" />
-                            <div class="flex-grow-1 flex-shrink-1">
-                                <div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="mb-1">
-                                            Maria Smantha <span class="small">- 2 hours ago</span>
-                                        </p>
-                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
-                                                reply</span></a>
-                                    </div>
-                                    <p class="small mb-0">
-                                        It is a long established fact that a reader will be distracted by
-                                        the readable content of a page.
-                                    </p>
-                                </div>
-
-                                <div class="d-flex flex-start mt-4">
-                                    <a class="me-3" href="#">
-                                        <img class="rounded-circle shadow-1-strong"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
-                                            width="30" height="30" />
-                                    </a>
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
-                                                    Simona Disa <span class="small">- 3 hours ago</span>
-                                                </p>
-                                            </div>
-                                            <p class="small mb-0">
-                                                letters, as opposed to using 'Content here, content here',
-                                                making it look like readable English.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-start mt-4">
-                                    <a class="me-3" href="#">
-                                        <img class="rounded-circle shadow-1-strong"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                                            width="30" height="30" />
-                                    </a>
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
-                                                    John Smith <span class="small">- 4 hours ago</span>
-                                                </p>
-                                            </div>
-                                            <p class="small mb-0">
-                                                the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <button onclick="addComment({{ $product->id }})" type="submit"
+                                class="btn btn-outline-success fas fa-paper-plane"></button>
+                        </form>
+                        {{-- comment --}}
+                        <div id="box-comment"></div>
                     </div>
                     <div class="tab-pane fade border p-4 rounded-6" id="profile0" role="tabpanel"
                         aria-labelledby="profile-tab0">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo eos laboriosam, debitis odit
-                        voluptatum non repellat neque consectetur impedit ab dicta id doloribus blanditiis rem
-                        repellendus expedita, animi aperiam omnis! Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. At, minus sint eos enim provident cupiditate suscipit, reiciendis sit accusamus fugit nemo
-                        ipsum iste facilis magni totam commodi illo animi nesciunt! Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Fugit provident quo ipsum ipsa, repellendus eos suscipit nam.
-                        Dignissimos eius ratione ea modi neque libero odit distinctio voluptate, nostrum pariatur saepe!
+                        {!! $product->desc !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script> --}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
     <script>
+        var subCondition = true;
+        var comCondition = true;
+
+        function commentElement(id) {
+            const url = '/comment/show/' + id
+            $.get(url, {}, function(comments, status) {
+                const query = "#box-comment"
+                $(query).html(comments)
+            })
+        }
+
+        function comment() {
+            if (comCondition == true) {
+                $("#form-comment").addClass('d-none');
+                console.log(comCondition)
+                comCondition = false
+            } else {
+                $("#form-comment").removeClass('d-none');
+                console.log(comCondition)
+                comCondition = true
+            }
+        }
+
+        function subComment(id) {
+            if (subCondition == true) {
+                $("#form-sub" + id).removeClass('d-none');
+
+                subCondition = false;
+
+            } else if (subCondition == false) {
+                $("#form-sub" + id).addClass('d-none');
+
+                subCondition = true;
+            }
+        }
+
+        setTimeout(() => {
+            commentElement({{ $product->id }});
+
+        }, 1000);
+
+        function addComment(id) {
+            const url = "/comment/add/" + id
+            const formComment = '#form-comment'
+            $('.btn').attr('disabled', true);
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: $(formComment).serialize(),
+                success: function(response) {
+                    $('.btn').attr('disabled', false);
+                    $('#message').val('');
+                    commentElement(id)
+                },
+                error: function(response) {
+                    if ($('#message').val()) {
+                        $('.btn').attr('disabled', false);
+                        swal({
+                            title: "Error!",
+                            text: "Anda perlu login!",
+                            type: "warning",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                    } else {
+                        $('.btn').attr('disabled', false);
+                        swal({
+                            title: "Error!",
+                            text: "Text tidak boleh kosong!",
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                    }
+                }
+            })
+        }
+
+        function addSub(id) {
+            const url = "/sub-comment/add/" + id
+            const message = $('#sub-message' + id).val()
+            $('.btn').attr('disabled', true);
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: {
+                    message: message
+                },
+                success: function(response) {
+                    $('.btn').attr('disabled', false);
+                    $('#sub-message' + id).val('');
+                    commentElement({{ $product->id }})
+                },
+                error: function(response) {
+                    if ($('#sub-message' + id).val()) {
+                        $('.btn').attr('disabled', false);
+                        swal({
+                            title: "Error!",
+                            text: "Anda perlu login!",
+                            type: "warning",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                    } else {
+                        $('.btn').attr('disabled', false);
+                        swal({
+                            title: "Error!",
+                            text: "Text tidak boleh kosong!",
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                    }
+
+                }
+            })
+        }
+
+
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault()
             ''

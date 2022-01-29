@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChattingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscribeController;
@@ -72,3 +73,9 @@ Route::get('/favorite/show/{id}', [FavController::class, 'showFav'])->name('shop
 Route::get('/favorite/add/{id}', [FavController::class, 'addFav'])->name('shop.addFav');  // add
 Route::get('/favorite/delete/{id}', [FavController::class, 'delFav'])->name('shop.delFav');  // add
 Route::get('/favorite/count', [FavController::class, 'sum'])->name('shop.elements.countFav'); //fav count
+
+// comment
+Route::get('/comment/add/{id}', [CommentController::class, 'store'])->name('comment.store');  // add
+Route::get('/comment/show/{id}', [CommentController::class, 'comElement'])->name('shop.elements.comment');  // show elements
+// sub comment
+Route::get('/sub-comment/add/{id}', [CommentController::class, 'subStore'])->name('subcomment.store');  // add

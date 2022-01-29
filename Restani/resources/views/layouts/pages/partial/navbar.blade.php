@@ -47,8 +47,8 @@
         <!-- Right elements -->
         <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-2"><span
                 class="badge rounded-pill badge-notification bg-danger" id="chat" style="display: none"></span></a>
-        <a href="{{ route('shop.favorite') }}" class="fa fa-heart mx-4"><span class="badge rounded-pill badge-notification bg-danger" id="favo"
-                style="display: none"></span></a>
+        <a href="{{ route('shop.favorite') }}" class="fa fa-heart mx-4"><span
+                class="badge rounded-pill badge-notification bg-danger" id="favo" style="display: none"></span></a>
         <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-2"><span
                 class="badge rounded-pill badge-notification bg-danger" id="cart" style="display: none"></span></a>
         <div class="align-items-center border-left ml-2 d-lg-flex collapse">
@@ -68,50 +68,51 @@
     </div>
     <!-- Container wrapper -->
 </nav>
-<script>
-    function cartCount() {
-        const url = "{{ route('shop.elements.countCart') }}";
-        $.get(url, {}, function(checkouts, status) {
-            const query = "#cart"
+@auth
+    <script>
+        function cartCount() {
+            const url = "{{ route('shop.elements.countCart') }}";
+            $.get(url, {}, function(checkouts, status) {
+                const query = "#cart"
 
-            $(query).html(checkouts);
-            if (checkouts == 0) {
-                document.getElementById('cart').style.display = 'none';
-            } else {
-                document.getElementById('cart').style.display = 'inline';
-            }
-        });
-    }
+                $(query).html(checkouts);
+                if (checkouts == 0) {
+                    document.getElementById('cart').style.display = 'none';
+                } else {
+                    document.getElementById('cart').style.display = 'inline';
+                }
+            });
+        }
 
-    function favCount() {
-        const url = "{{ route('shop.elements.countFav') }}";
-        $.get(url, {}, function(favo, status) {
-            const query = "#favo"
-            $(query).html(favo);
-            if (favo == 0) {
-                document.getElementById('favo').style.display = 'none';
-            } else {
-                document.getElementById('favo').style.display = 'inline';
-            }
-        });
-    }
+        function favCount() {
+            const url = "{{ route('shop.elements.countFav') }}";
+            $.get(url, {}, function(favo, status) {
+                const query = "#favo"
+                $(query).html(favo);
+                if (favo == 0) {
+                    document.getElementById('favo').style.display = 'none';
+                } else {
+                    document.getElementById('favo').style.display = 'inline';
+                }
+            });
+        }
 
-    function chatCount() {
-        const url = "{{ route('chats.elements.countChat') }}";
-        $.get(url, {}, function(checkouts, status) {
-            const query = "#chat"
+        function chatCount() {
+            const url = "{{ route('chats.elements.countChat') }}";
+            $.get(url, {}, function(checkouts, status) {
+                const query = "#chat"
 
-            $(query).html(checkouts);
-            if (checkouts == 0) {
-                document.getElementById('chat').style.display = 'none';
-            } else {
-                document.getElementById('chat').style.display = 'inline';
-            }
-        });
-    }
-    window.onload = function() {
-        cartCount();
+                $(query).html(checkouts);
+                if (checkouts == 0) {
+                    document.getElementById('chat').style.display = 'none';
+                } else {
+                    document.getElementById('chat').style.display = 'inline';
+                }
+            });
+        }
+       
         favCount();
+        cartCount();
         chatCount();
-    }
-</script>
+    </script>
+@endauth

@@ -60,10 +60,15 @@
                             onclick="sunting()"></span>
                     </div>
                     <div class="card-body">
-                        <div class="pt-3 pe-3 overflow-scroll" id="box" data-mdb-perfect-scrollbar="true"
+                        <div class="pt-3 pe-3 overflow-scroll " id="box" data-mdb-perfect-scrollbar="true"
                             style="position: relative; height: 400px;">
+                            <div class="d-flex justify-content-center">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfnNXBGB8Kmgi6GLJPu8MhONGhZXVxyX9e9NCFjv2SULnLHWoiF0JBbsBgkFcPRels1NE&usqp=CAU"
+                                    alt="">
 
+                            </div>
                         </div>
+
                         <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
                                 alt="avatar 3" style="width: 40px; height: 100%;">
@@ -77,8 +82,15 @@
                         @if (session()->has('rooma'))
 
                             <input type="text" id="target-user" name="room_id" value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }}@endforeach">
+
+                            @foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room)
+                                <script>
+                                    target({{ $room->id }})
+                                </script>
+                            @endforeach
+
                         @else
-                            <input type="text" id="target-user" name="room_id" value="">
+                            <input type="hidden" id="target-user" name="room_id" value="">
                         @endif
                     </div>
                 </div>
@@ -107,7 +119,6 @@
             });
             // end scroll
 
-
         });
     }
 
@@ -116,16 +127,13 @@
 
         const target = $("#target-user").val(id);
         const title = $("#reqTit" + id).val();
-
         document.getElementById('title').innerHTML = title;
         document.getElementById('title').style.textTransform = "capitalize";
         $("#target-user").val(id);
         sunting()
         box(id);
+        console.log('load')
 
-
-
-        // document.getElementById("select" + id).style.background = 'rgb(3, 94, 56)';
     }
 
     function store() {

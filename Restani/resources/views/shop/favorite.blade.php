@@ -34,69 +34,31 @@
                         </div>
                         <div class="card-body align-middle d-flex justify-content-between">
                             <div class="row">
-                                {{-- loop --}}
-                                <div class="col-lg-4 mt-1">
-                                    <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                                        class="img-fluid rounded-4" alt="">
-                                </div>
-                                <div class="col-lg-8 mt-1">
-                                    <div class="mt-n2">
-                                        <small style="font-size: 12px;">Paket Hemat</small>
+                                @foreach ($product->slice(0, 3) as $prod)
+                                        
+                                    <div class="col-lg-4 mb-2">
+                                        <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
+                                            class="img-fluid rounded-4" alt=""
+                                            style="width:200px; height: 60px; object-position: center;overflow: hidden;object-fit: cover;">
                                     </div>
-                                    <div class="mt-n2">
-                                        <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star" style="font-size: 12px;"></span>
-                                    </div>
-                                    <div class="mt-n2">
-                                        <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                                    </div>
-                                </div>
-                                <!-- break -->
-                                {{-- loop --}}
-                                <div class="col-lg-4 mt-1">
-                                    <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                                        class="img-fluid rounded-4" alt="">
-                                </div>
-                                <div class="col-lg-8 mt-1">
-                                    <div class="mt-n2">
-                                        <small style="font-size: 12px;">Paket Hemat</small>
-                                    </div>
-                                    <div class="mt-n2">
-                                        <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star" style="font-size: 12px;"></span>
-                                    </div>
-                                    <div class="mt-n2">
-                                        <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                                    </div>
-                                </div>
-                                <!-- break -->
-                                {{-- loop --}}
-                                <div class="col-lg-4 mt-1">
-                                    <img src="https://asset.kompas.com/crops/gjGOH-MwyOdc0rOnaV6lUzXlLAo=/100x67:900x600/750x500/data/photo/2020/12/22/5fe16f9b8cfc0.jpg"
-                                        class="img-fluid rounded-4" alt="">
-                                </div>
-                                <div class="col-lg-8 mt-1">
-                                    <div class="mt-n2">
-                                        <small style="font-size: 12px;">Paket Hemat</small>
-                                    </div>
-                                    <div class="mt-n2">
-                                        <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                        <span class="fa fa-star" style="font-size: 12px;"></span>
-                                    </div>
-                                    <div class="mt-n2">
-                                        <small class="text-success fw-bold" style="font-size: 12px;">Rp 75.000</small>
-                                    </div>
-                                </div>
-                                <!-- break -->
+                                    <a href="{{ route('shop.preview', ['key'=>$prod->key]) }}" class="col-lg-8 mt-2">
+                                        <div class="mt-n2">
+                                            <small style="font-size: 12px;">{{ Str::limit($prod->title, 20) }}</small>
+                                        </div>
+                                        <div class="mt-n1">
+                                            <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
+                                            <span class="fa fa-star" style="font-size: 12px;"></span>
+                                        </div>
+                                        <div class="mt-n1">
+                                            <small class="text-success fw-bold" style="font-size: 12px;">Rp
+                                                {{ $prod->harga }}</small>
+                                        </div>
+                                    </a>
+                                @endforeach
+            
                             </div>
                         </div>
                     </div>
@@ -117,8 +79,8 @@
                                             name="jumlah" id="jumlah">
                                         <a href="#add" onclick="cartAdd({{ $prod->product->id }})"><i
                                                 class="fa fa-plus-circle text-success fa-pull-right"></i></a>
-                                        <a href="{{ route('shop.preview', ['slug' => $prod->product->slug]) }}">
-            
+                                        <a href="{{ route('shop.preview', ['key' => $prod->product->key]) }}">
+             
                                             <p class="card-text text-body mt-n3 fw-bold">
                                                 {{ Str::limit($prod->product->title, 25) }}
                                             </p>
@@ -146,6 +108,3 @@
     </div>
    
 @endsection
-<script>
-
-</script>
