@@ -107,7 +107,7 @@
                                 <img src="{{ asset('assets/avatar/' . $product->user->avatar) }}" width="40" alt="">
                                 <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
                                 <input type="hidden" name="user_id" value="{{ $product->user->id }}">
-                                <a href="#" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
+                                <a href="{{ route('profile.index', ['name'=>$product->user->name]) }}" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
                                 @auth
 
                                     @if (Auth::user()->hasRole('user'))

@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index($name)
     {
-        $product = Product::where('user_id', Auth::id())->get();
+        $users = User::where('name', $name)->first();
+        $product = Product::where('user_id', $users->id)->get();
         foreach ($product as $prod) {
             $prodFav = Favorite::where('product_id', $prod->id)->get();
             foreach ($prodFav as $fav){
@@ -39,7 +40,7 @@ class ProfileController extends Controller
             $comCount = 0;
         }
         $category = Category::all();
-        return view('profile.index', compact('product', 'category', 'favCount', 'comCount'));
+        return view('profile.index', compact('product', 'category', 'favCount', 'comCount', 'users'));
     }
     public function updTelp(Request $request)
     {

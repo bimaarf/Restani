@@ -82,7 +82,7 @@ Route::get('/comment/show/{id}', [CommentController::class, 'comElement'])->name
 Route::get('/sub-comment/add/{id}', [CommentController::class, 'subStore'])->name('subcomment.store');  // add
 
 // profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile/{name}', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/proifle/no-telp', [ProfileController::class, 'updTelp'])->name('profile.telp');  // add
 Route::get('/proifle/password', [ProfileController::class, 'updPass'])->name('profile.pass');  // add
 Route::post('/proifle/avatar', [ProfileController::class, 'updAvatar'])->name('profile.avatar');  // add
