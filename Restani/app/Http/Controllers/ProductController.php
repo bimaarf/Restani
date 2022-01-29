@@ -83,7 +83,7 @@ class ProductController extends Controller
            }
            
            $product->foto              = json_encode($data);
-           $product->lokasi       = $request->lokasi;
+           $product->lokasi            = $request->lokasi;
            $product->kategori_id       = $request->kategori_id;
            $product->user_id           = Auth::id();
         }

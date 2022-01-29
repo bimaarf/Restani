@@ -6,6 +6,7 @@ use App\Http\Controllers\ChattingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,3 +80,9 @@ Route::get('/comment/add/{id}', [CommentController::class, 'store'])->name('comm
 Route::get('/comment/show/{id}', [CommentController::class, 'comElement'])->name('shop.elements.comment');  // show elements
 // sub comment
 Route::get('/sub-comment/add/{id}', [CommentController::class, 'subStore'])->name('subcomment.store');  // add
+
+// profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/proifle/no-telp', [ProfileController::class, 'updTelp'])->name('profile.telp');  // add
+Route::get('/proifle/password', [ProfileController::class, 'updPass'])->name('profile.pass');  // add
+Route::post('/proifle/avatar', [ProfileController::class, 'updAvatar'])->name('profile.avatar');  // add

@@ -51,16 +51,41 @@
                 class="badge rounded-pill badge-notification bg-danger" id="favo" style="display: none"></span></a>
         <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-2"><span
                 class="badge rounded-pill badge-notification bg-danger" id="cart" style="display: none"></span></a>
-        <div class="align-items-center border-left ml-2 d-lg-flex collapse">
+        <div class="align-items-center border-left ml-4 d-lg-flex collapse">
             @if (Auth::check())
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="#" class="btn btn-outline-info fw-bold ml-4 fs-6 text-capitalize rounded-pill" onclick="event.preventDefault();
-                this.closest('form').submit();">Logout</a>
-                </form>
+                <ul class="navbar-nav d-flex flex-row d-none d-sm-flex ml-4">
+                    <!-- Notification dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center rounded-pill text-capitalize"
+                            href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <i class="fa fa-user"></i>
+                            &nbsp;<span class="font-normal">{{ Auth::user()->name }}</span>&nbsp;
+
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profil</a></li>
+
+                            <li>
+
+                                @if (Auth::check())
+                                <button class="dropdown-item"
+                                    onclick="logout()">Logout</button>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button id="logoutTrue" class="dropdown-item d-none" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</button>
+                                    </form>
+                                @endif
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             @else
                 <a href="{{ route('login') }}" class="text-success fs-6 fw-bold mx-4">Login</a>
-                <a href="#" class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
+                <a href="{{ route('register') }}" class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
             @endif
 
         </div>
@@ -70,6 +95,21 @@
 </nav>
 @auth
     <script>
+        function logout() {
+            swal({
+                title: "Log out!",
+                text: "Are you sure you want to log out?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.dismiss !== 'cancel') {
+                    $("#logoutTrue").click();
+                }
+            })
+        }
+
         function cartCount() {
             const url = "{{ route('shop.elements.countCart') }}";
             $.get(url, {}, function(checkouts, status) {
@@ -110,7 +150,7 @@
                 }
             });
         }
-       
+
         favCount();
         cartCount();
         chatCount();
