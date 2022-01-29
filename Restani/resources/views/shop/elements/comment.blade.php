@@ -3,7 +3,7 @@
 
     <div class="d-flex flex-start my-4">
         <img class="rounded-circle shadow-1-strong me-3"
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="40" height="40" />
+            src="{{ asset('assets/avatar/' . $comment->user->avatar) }}" alt="avatar" width="40" height="40" />
         <div class="flex-grow-1 flex-shrink-1">
             <div>
                 <div class="d-flex justify-content-between align-items-center">
@@ -34,11 +34,9 @@
 
             @foreach ($subs->where('comment_id', $comment->id) as $sub)
                 <div class="d-flex flex-start mt-4">
-                    <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar" width="30"
+                        <img class="rounded-circle shadow-1-strong me-3"
+                            src="{{ asset('assets/avatar/' . $sub->user->avatar) }}" alt="avatar" width="30"
                             height="30" />
-                    </a>
                     <div class="flex-grow-1 flex-shrink-1">
                         <div>
                             <div class="d-flex justify-content-between align-items-center">

@@ -48,15 +48,22 @@
                                 class="fa fa-times link-danger"></i></a>
                     </td>
                 </tr>
-            @endforeach
-            <tr class=" text-right">
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Total</th>
-                <th scope="col" id="total" class="fw-bold">Rp {{ $total }}</th>
-                <th scope="col"></th>
-            </tr>
+                
+                @endforeach
+                <tr class=" text-right">
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Total</th>
+                    <th scope="col" id="total" class="fw-bold">Rp {{ $total }}</th>
+                   
+                    <th scope="col"><a
+                            href="https://wa.me/{{ $cart->product->user->telp }}?text= *Checkout!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A @foreach ($title as $item)%0A *{{ $i++ }}. {{ $item['title'] }}* %0A Jumlah   {{ $item['jumlah'] }} = *Rp {{ $item['subtotal'] }}* %0A 
+                             @endforeach
+                                        *Total = Rp {{ $total }}*
+                            "
+                            target="_blank" class="btn btn-success rounded-6 text-capitalize">Checkout</a></th>
+                </tr>
 
         </tbody>
 
@@ -77,8 +84,7 @@
                     ?>
                 <div class="col-4">
                     <a href="#">
-                        <img src="{{ asset('product/' . $decode[0]) }}" class="img-fluid rounded"
-                            alt=""
+                        <img src="{{ asset('product/' . $decode[0]) }}" class="img-fluid rounded" alt=""
                             style="height: 60px;width:130px;object-position: center;overflow: hidden;object-fit: cover;">
                     </a>
 

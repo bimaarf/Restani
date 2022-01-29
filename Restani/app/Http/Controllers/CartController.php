@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Checkouts;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,19 @@ class CartController extends Controller
         $carts   = Checkouts::where('user_id', Auth::id())
                                 ->orderBy('id', 'DESC')->get();
         $total = 0;
+        $i = 1;
+        $title = array();
         foreach ($carts as $cart) {
             $total += $cart->total;
+
+            $isi = array(
+                "title" => $cart->product->title,
+                "jumlah" => $cart->jumlah,
+                "subtotal" => $cart->total
+            );
+            array_push($title, $isi);
         }
-        return view('shop.elements.cart', compact( 'carts', 'total'));
+        return view('shop.elements.cart', compact( 'carts', 'total', 'title', 'i', 'isi'));
     }
     
     public function cartDelete($id)

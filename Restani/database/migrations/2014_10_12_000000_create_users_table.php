@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('no_telp');
+            $table->string('avatar', 255)->default('default.jpg');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -29,17 +31,20 @@ class CreateUsersTable extends Migration
             [
                 'name'      => 'admin',
                 'email'     => 'admin@gmail.com',
-                'password'  => Hash::make('admin')
+                'password'  => Hash::make('admin'),
+                'no_telp'   => '62895704855745'
             ],
             [
                 'name'      => 'mitra',
                 'email'     => 'mitra@gmail.com',
-                'password'  => Hash::make('admin')
+                'password'  => Hash::make('admin'),
+                'no_telp'   => '62895704855745'
             ],
             [
                 'name'      => 'user',
                 'email'     => 'user@gmail.com',
-                'password'  => Hash::make('admin')
+                'password'  => Hash::make('admin'),
+                'no_telp'   => '62895704855745'
             ],
         ]);
         
