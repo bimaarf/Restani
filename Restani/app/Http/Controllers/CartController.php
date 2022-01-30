@@ -24,7 +24,6 @@ class CartController extends Controller
         $product = Product::all();
         $carts   = Checkouts::where('user_id', Auth::id())
                                 ->orderBy('id', 'DESC')->get();
-       
         $i = 1;
         $title = array();
         $isi = [];

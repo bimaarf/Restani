@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Subscribe;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class SubscribeController extends Controller
 {
     public function sub()
@@ -17,13 +17,24 @@ class SubscribeController extends Controller
     {
         $subscribe = Subscribe::where('user_id', Auth::id())
         ->orderBy('id', 'DESC')->get();
+        $i = 1;
+        $title = array();
+        $isi = [];
+        $users = User::all();
+        $product = Product::all();
 
         $total = 0;
         foreach ($subscribe as $sub) {
-            $total += $sub->total;
+            $isi = array(
+                "mitra_id"      => $sub->product->user_id,
+                "title"         => $sub->product->title,
+                "jumlah"        => $sub->jumlah,
+                // "subtotal"   => $cart->total
+            );
+            array_push($title, $isi);
         }
         
-        return view('shop.elements.subscribe', compact('subscribe', 'total'));
+        return view('shop.elements.subscribe', compact('subscribe', 'total', 'i', 'isi', 'users', 'product', 'title'));
     }
     public function addSub(Request $request, $id)
     {

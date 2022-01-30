@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
@@ -14,18 +16,35 @@ class BookingController extends Controller
         return view('shop.booking');
     }
 
-    public function bookElement()
+    public function bookElement(Request $request)
     {
+        $i = 1;
+        $title = array();
+        $isi = [];
+        $users = User::all();
+        $product = Product::all();
+
+        
         $bookings = Booking::where('user_id', Auth::id())
         ->orderBy('id', 'DESC')->get();
 
         $total = 0;
         foreach ($bookings as $booking) {
-            $total += $booking->total;
+            // $total += $booking->total;
+
+            $isi = array(
+                "mitra_id"      => $booking->product->user_id,
+                "title"         => $booking->product->title,
+                "jumlah"        => $booking->jumlah,
+                // "subtotal"   => $cart->total
+            );
+            array_push($title, $isi);
         }
         
-        return view('shop.elements.booking', compact('bookings', 'total'));
+        return view('shop.elements.booking', compact('bookings', 'total',  'title', 'i', 'isi', 'users', 'product'));
     }
+    
+    
     public function updateBook(Request $request, $id)
     {
         $book   = Booking::find($id);

@@ -45,8 +45,11 @@
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
-        <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-2"><span
-                class="badge rounded-pill badge-notification bg-danger" id="chat" style="display: none"></span></a>
+        @auth
+
+            <a href="{{ route('chats.index') }}" class="fa fa-comment-dots mx-2"><span
+                    class="badge rounded-pill badge-notification bg-danger" id="chat" style="display: none"></span></a>
+        @endauth
         <a href="{{ route('shop.favorite') }}" class="fa fa-heart mx-4"><span
                 class="badge rounded-pill badge-notification bg-danger" id="favo" style="display: none"></span></a>
         <a href="{{ route('shop.cart') }}" class="fa fa-shopping-cart mx-2"><span
@@ -66,16 +69,17 @@
 
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('profile.index', ['name'=>Auth::user()->name]) }}">Profil</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('profile.index', ['name' => Auth::user()->name]) }}">Profil</a></li>
 
                             <li>
 
                                 @if (Auth::check())
-                                <button class="dropdown-item"
-                                    onclick="logout()">Logout</button>
+                                    <button class="dropdown-item" onclick="logout()">Logout</button>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <button id="logoutTrue" class="dropdown-item d-none" href="{{ route('logout') }}"
+                                        <button id="logoutTrue" class="dropdown-item d-none"
+                                            href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); this.closest('form').submit();">Logout</button>
                                     </form>
                                 @endif
@@ -85,7 +89,8 @@
                 </ul>
             @else
                 <a href="{{ route('login') }}" class="text-success fs-6 fw-bold mx-4">Login</a>
-                <a href="{{ route('register') }}" class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
+                <a href="{{ route('register') }}"
+                    class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
             @endif
 
         </div>

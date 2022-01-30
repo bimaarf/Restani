@@ -1,19 +1,18 @@
-@foreach ($users as $user)
-    <?php $count = 0; ?>
-    <div id="toko{{ $user->id }}">
-        <div class="table-responsive-lg">
-            <table class="table table-borderless border d-sm-none d-lg-table collapse">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th scope="col">Gambar</th>
-                        <th scope="col">Produk</th>
-                        <th scope="col">Harga</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Subtotal</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div class="table-responsive-lg">
+        <table class="table table-borderless border d-sm-none d-lg-table collapse">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th scope="col">Gambar</th>
+                    <th scope="col">Produk</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Jumlah</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            @foreach ($users as $user)
+                <?php $count = 0; ?>
+                <tbody id="toko{{ $user->id }}">
                     @php
                         $invoice = [];
                     @endphp
@@ -21,6 +20,7 @@
 
                         @if ($cart->product->user_id == $user->id)
                             @php
+                                $total += $cart->total;
                                 $buy = [
                                     'mitra_id' => $cart->product->user_id,
                                     'title' => $cart->product->title,
@@ -79,8 +79,14 @@
                         <th scope="col"></th>
 
                         <th scope="col">
-                            <a href="https://wa.me/{{ $cart->product->user->telp }}?text= *Checkout!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A  %0A @foreach ($invoice as $buys) {{ $i++ }}. {{ $buys['title'] }}  %0A jumlah x {{ $buys['jumlah'] }} = *{{ $buys['subtotal'] }}* %0A @endforeach"
-                                target="_blank" class="btn btn-success rounded-6 text-capitalize">Checkout</a>
+                            @auth
+                                <span class="h5 fw-bold text-black-50">Total</span>
+
+                                <span class="h5 ml-2 fw-bold text-success">Rp {{ $total }}</span>
+                                <a href="https://wa.me/{{ $user->no_telp }}?text= *Checkout!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A  %0A @foreach ($invoice as $buys) {{ $i++ }}. {{ $buys['title'] }}  %0A     jumlah x {{ $buys['jumlah'] }} = *Rp {{ $buys['subtotal'] }}* %0A @endforeach %0A *Total = Rp {{ $total }}*"
+                                    target="_blank" class="btn btn-success rounded-6 text-capitalize ml-4">Checkout</a>
+                            @endauth
+
                         </th>
                     </tr>
 
@@ -90,55 +96,57 @@
                 @foreach ($title as $prod)
                     @if ($prod['mitra_id'] == $user->id)
                         <?php $count = count($title); ?>
+                        @php
+                            $total = 0;
+                        @endphp
                     @endif
 
                 @endforeach
 
-            </table>
-        </div>
 
+                {{-- NULL --}}
+                @if ($count == 0)
+                    <style>
+                        #toko{{ $user->id }} {
+                            display: none;
+                        }
+
+                    </style>
+                @endif
+                {{-- NULL --}}
+            @endforeach
+        </table>
     </div>
-    {{-- NULL --}}
-    @if ($count == 0)
-        <style>
-            #toko{{ $user->id }} {
-                display: none;
-            }
-
-        </style>
-    @endif
-    {{-- NULL --}}
-@endforeach
 
 
-{{-- mobile --}}
+    {{-- mobile --}}
 
-@foreach ($users as $user)
-    <?php $count = 0; ?>
-    <div id="toko{{ $user->id }}">
-        <div class="card d-sm-block d-lg-none">
-            <div class="card-header rounded-9 bg-primary">
-                <h5 class="text-white text-center">Keranjang</h5>
-            </div>
-            <div class="card-body">
+    <div class="card d-sm-block d-lg-none">
+        <div class="card-header rounded-9 bg-primary">
+            <h5 class="text-white text-center">Keranjang</h5>
+        </div>
+        @foreach ($users as $user)
+            <?php $count = 0; ?>
+            <div class="card-body" id="toko{{ $user->id }}">
                 <img src="{{ asset('assets/avatar/' . $user->avatar) }}" class="img-thumbnail float-left" width="40"
                     alt=""><span class="fw-bold float-left m-2 text-capitalize">{{ $user->name }}</span>
             </div>
-            <div class="card-body mt-n4">
+            <div class="card-body mt-n4" id="toko{{ $user->id }}">
                 @php
                     $invoice = [];
                 @endphp
                 @foreach ($carts as $cart)
                     @if ($cart->product->user_id == $user->id)
-                    @php
-                        $buy = [
-                            'mitra_id' => $cart->product->user_id,
-                            'title' => $cart->product->title,
-                            'jumlah' => $cart->jumlah,
-                            'subtotal' => $cart->total,
-                        ];
-                        array_push($invoice, $buy);
-                    @endphp
+                        @php
+                            $total += $cart->total;
+                            $buy = [
+                                'mitra_id' => $cart->product->user_id,
+                                'title' => $cart->product->title,
+                                'jumlah' => $cart->jumlah,
+                                'subtotal' => $cart->total,
+                            ];
+                            array_push($invoice, $buy);
+                        @endphp
                         <!-- loop -->
                         <div class="row border-top py-4">
                             <?php
@@ -187,27 +195,38 @@
 
                 @endforeach
 
+                @auth
+                    <div class="card-footer">
+                        <div class="float-right">
+                            <span class="text-black">Total : </span><span class="text-success fw-bold">Rp
+                                {{ $total }}</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/{{ $user->no_telp }}?text= *Checkout!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A  %0A @foreach ($invoice as $buys) {{ $i++ }}. {{ $buys['title'] }}  %0A     jumlah x {{ $buys['jumlah'] }} = *Rp {{ $buys['subtotal'] }}* %0A @endforeach %0A *Total = Rp {{ $total }}*"
+                        target="_blank" class="btn btn-success rounded-6 text-capitalize">Checkout</a>
+                @endauth
             </div>
-            <a href="https://wa.me/{{ $cart->product->user->telp }}?text= *Checkout!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A  %0A @foreach ($invoice as $buys) {{ $i++ }}. {{ $buys['title'] }}  %0A jumlah x {{ $buys['jumlah'] }} = *{{ $buys['subtotal'] }}* %0A @endforeach"
-                target="_blank" class="btn btn-success rounded-6 text-capitalize w-25 m-4">Checkout</a>
-        </div>
 
 
-        @foreach ($title as $prod)
-            @if ($prod['mitra_id'] == $user->id)
-                <?php $count = count($title); ?>
+
+            @foreach ($title as $prod)
+                @if ($prod['mitra_id'] == $user->id)
+                    <?php $count = count($title); ?>
+                    @php
+                        $total = 0;
+                    @endphp
+                @endif
+
+            @endforeach
+            {{-- NULL --}}
+            @if ($count == 0)
+                <style>
+                    #toko{{ $user->id }} {
+                        display: none;
+                    }
+
+                </style>
             @endif
-
+            {{-- NULL --}}
         @endforeach
     </div>
-    {{-- NULL --}}
-    @if ($count == 0)
-        <style>
-            #toko{{ $user->id }} {
-                display: none;
-            }
-
-        </style>
-    @endif
-    {{-- NULL --}}
-@endforeach
