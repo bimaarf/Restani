@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="input-group form-group">
                                             <label class="pr-4" style="margin-right: 12px">No. Telp <i class="fab fa-whatsapp ml-1 text-success"></i></label>
-                                            <a href="https://wa.me/{{ $users->no_telp }}?text=Hallo kak, saya {{ Auth::user()->name }}"><p class="ml-2">+{{ $users->no_telp }}</p></a>
+                                            <a href="https://wa.me/{{ $users->no_telp }}?text=Hallo kak, saya @auth {{ Auth::user()->name }} @endauth"><p class="ml-2">+{{ $users->no_telp }}</p></a>
                                         </div>
                                         <div class="input-group form-group">
                                             <label style="margin-right: 25px">Jenis Akun</label>

@@ -20,23 +20,27 @@ class CartController extends Controller
 
     public function cartElements(Request $request)
     {
-       
+        $users = User::all();
+        $product = Product::all();
         $carts   = Checkouts::where('user_id', Auth::id())
                                 ->orderBy('id', 'DESC')->get();
-        $total = 0;
+       
         $i = 1;
         $title = array();
+        $isi = [];
+        $total = 0;
         foreach ($carts as $cart) {
-            $total += $cart->total;
+            // $total += $cart->total;
 
             $isi = array(
+                "mitra_id" => $cart->product->user_id,
                 "title" => $cart->product->title,
                 "jumlah" => $cart->jumlah,
-                "subtotal" => $cart->total
+                // "subtotal" => $cart->total
             );
             array_push($title, $isi);
         }
-        return view('shop.elements.cart', compact( 'carts', 'total', 'title', 'i', 'isi'));
+        return view('shop.elements.cart', compact( 'carts', 'total', 'title', 'i', 'isi', 'users', 'product'));
     }
     
     public function cartDelete($id)

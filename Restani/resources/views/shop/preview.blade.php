@@ -56,8 +56,9 @@
                     <p class="h5 text-success">Rp {{ $product->harga }}</p>
                 </div>
                 <div id="favorite"></div>
-
+                
                 <br><br><br><br><br>
+                <span class="float-end"><i class="fas fa-tags"></i> {{ $product->kategori->name }}</span>
                 @if ($product->stok > 0)
                     <i class="fa fa-check bg-success text-white rounded-circle p-1"></i> <span
                         class="ml-2 fw-bold h6 text-black-50">Stok Tersedia</span> <span
@@ -67,7 +68,6 @@
                 @endif
                 <div class="float-none">
                     <p class="text-body border-bottom pb-4">{!! $product->desc !!}</p>
-
 
                     <div class="float-left">
 
@@ -107,7 +107,8 @@
                                 <img src="{{ asset('assets/avatar/' . $product->user->avatar) }}" width="40" alt="">
                                 <span class="fw-bold text-capitalize">{{ $product->user->name }}</span>
                                 <input type="hidden" name="user_id" value="{{ $product->user->id }}">
-                                <a href="{{ route('profile.index', ['name'=>$product->user->name]) }}" class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
+                                <a href="{{ route('profile.index', ['name' => $product->user->name]) }}"
+                                    class="btn btn-success rounded-6 text-capitalize mx-4">Kunjungi Petani</a>
                                 @auth
 
                                     @if (Auth::user()->hasRole('user'))
@@ -156,8 +157,8 @@
                             <input id="message" type="text" value="" maxlength="250"
                                 class="form-control border-0 border-bottom" name="message" placeholder='Ketikkan komentar..'
                                 style="border-color: inherit;
-                                                                    -webkit-box-shadow: none;
-                                                                    box-shadow: none;">
+                                                                        -webkit-box-shadow: none;
+                                                                        box-shadow: none;">
 
                             <button onclick="addComment({{ $product->id }})" type="submit"
                                 class="btn btn-outline-success fas fa-paper-plane"></button>

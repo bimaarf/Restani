@@ -74,8 +74,9 @@
                         <div class="col-8">
                             <form action="{{ route('shop.tag') }}">
                                 <div class="input-group rounded">
-                                    <input type="search" class="form-control rounded" name="title" placeholder="Cari Produk" aria-label="Search" value="{{ request('title') }}"
-                                    aria-describedby="search-addon" />
+                                    <input type="search" class="form-control rounded" name="title" placeholder="Cari Produk"
+                                        aria-label="Search" value="{{ request('title') }}"
+                                        aria-describedby="search-addon" />
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -87,33 +88,40 @@
                     <div class="row">
                         <marquee>{{ $notFound }}</marquee>
                         @foreach ($product as $prod)
-                        <style>marquee{display: none}</style>
+                            <style>
+                                marquee {
+                                    display: none
+                                }
+
+                            </style>
                             <div class="col-lg-3 col-6 mt-2">
                                 <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
                                     class="card-img-top img-fluid rounded-6" alt="Sunset Over the Sea"
                                     style="height: 100px; object-position: center;overflow: hidden;object-fit: cover;" />
-
+            
                                 <div class="card rounded-6 mt-n4">
                                     <div class="card-body">
-                                        <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden"
-                                            value="1" name="jumlah" id="jumlah">
+                                        <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden" value="1"
+                                            name="jumlah" id="jumlah">
                                         <a href="#add" onclick="cartAdd({{ $prod->id }})"><i
-                                                class="fa fa-plus-circle text-success fa-pull-right"></i></a>
+                                                class="fa fa-plus-circle text-success position-absolute"
+                                                style="right: 10px; top: 10px"></i></a>
+            
                                         <a href="{{ route('shop.preview', ['key' => $prod->key]) }}">
-
-                                            <p class="card-text text-body mt-n3 fw-bold">
-                                                {{ Str::limit($prod->title, 25) }}
+            
+                                            <p class="card-text text-body mt-n3 fw-bold small">
+                                                {{ Str::limit($prod->title, 20) }}
                                             </p>
-                                            <p class="card-text text-primary small text-success mt-n3 fw-bold">
+                                            <p class="card-text text-primary small text-success mt-n3 small fw-bold">
                                                 Rp {{ $prod->harga }}
                                             </p>
                                         </a>
                                         <div class="mt-n1">
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star" style="font-size: 12px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                            <span class="fa fa-star" style="font-size: 10px;"></span>
                                         </div>
                                     </div>
                                 </div>
