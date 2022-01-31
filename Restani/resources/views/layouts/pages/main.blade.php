@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mdb.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/wave.css') }}">
     <link rel="stylesheet" href="{{ asset('css/trix.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ratting.css') }}">
+
     <script src="{{ asset('css/trix.js') }}"></script>
     <style>
         trix-toolbar [data-trix-button-group="file-tools"] {
@@ -76,7 +78,7 @@
     @yield('content')
 
     <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
-
+    <script src="{{ asset('css/ratting.js') }}"></script>
     <script src="{{ asset('assets/js/mdb.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -326,10 +328,10 @@
                 $(query).html(product);
             });
         }
-       
+
         function favAdd(id) {
             const url = "/favorite/add/" + id
-            const formAdd = $("fav-add"+id).val()
+            const formAdd = $("fav-add" + id).val()
 
             $('.btn').attr('disabled', true);
             $.ajax({
@@ -343,9 +345,10 @@
                 }
             })
         }
+
         function favDel(id) {
             const url = "/favorite/delete/" + id
-            const formDell = $("fav-del"+id).val()
+            const formDell = $("fav-del" + id).val()
 
             $('.btn').attr('disabled', true);
             $.ajax({
@@ -359,10 +362,125 @@
                 }
             })
         }
+
+        function ratShow(id) {
+            const url = "/ratting/show/" + id
+            $.get(url, {}, function(product, status) {
+                const query = "#ratting"
+                $(query).html(product);
+            });
+        }
+
+        function ratAdd(id) {
+            const url = "/ratting/add/" + id
+            $('.stars').attr('disabled', true);
+            $(':radio').change(function() {
+                console.log('New star rating: ' + this.value);
+                const stars = this.value;
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        stars: stars
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Ratting " + stars,
+                            type: "success",
+                            text: "Anda memberikan " + stars + " bintang",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                        ratShow(id)
+                    }
+                })
+            });
+
+        }
+
+        function ratUpd(id) {
+            const url = "/ratting/upd/" + id
+            $('.stars').attr('disabled', true);
+            $(':radio').change(function() {
+                console.log('Update star rating: ' + this.value);
+                const stars = this.value;
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        stars: stars
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Ratting " + stars,
+                            type: "success",
+                            text: "Anda memberikan " + stars + " bintang",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Yes!",
+                            showCancelButton: false,
+                        })
+                        ratShow(id)
+                    }
+                })
+            });
+
+        }
+
+        function starsSide(id) {
+            const url = "/stars/" + id
+            $.get(url, {}, function(product, status) {
+                const query = "#starsSide" + id
+                $(query).html(product);
+            });
+        }
+
+        function stars(id) {
+            const url = "/stars/" + id
+            $.get(url, {}, function(product, status) {
+                const query = "#stars" + id
+                $(query).html(product);
+            });
+        }
+
+
+        // product deleted by mitra
+        function proDelete(id) {
+            swal({
+                title: "Delete ?",
+                text: "Yakin ingin menghapus ?",
+                type: "warning",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.dismiss !== 'cancel') {
+                    const url = "/product/delete/" + id
         
+                    $('.btn').attr('disabled', true);
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function(response) {
+                            swal({
+                                title: "Dihapus",
+                                text: 'Produk dihapus!',
+                                type: "success",
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Yes!",
+                                showCancelButton: false,
+                            })
+                            location.reload()
+                            console.log('produk  deleted');
+                            $('.btn').attr('disabled', false);
+                        }
+                    })
+                }
+            })
+        }
     </script>
-   
-    
+
+
 
 </body>
 

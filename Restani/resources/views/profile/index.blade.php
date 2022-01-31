@@ -6,6 +6,7 @@
 
             @if ($users->id == Auth::user()->id)
                 @include('shop.modal.modal_add_product')
+                
                 <!-- Button trigger modal -->
                 <!-- Modal -->
 
@@ -48,11 +49,16 @@
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                                     <img src="{{ asset('assets/avatar/' . $users->avatar) }}"
                                         alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                        style="width: 150px; z-index: 1" data-mdb-toggle="modal"
-                                        data-mdb-target="#img-profile">
+                                        style="width: 150px; z-index: 1" @auth @if ($users->id == Auth::user()->id) data-mdb-toggle="modal"
+                                    data-mdb-target="#img-profile" @endif @endauth>
+                                    @auth
 
-                                    <i class="fas fa-pen-alt text-black"
-                                        style="z-index: 1; margin-left:130px;margin-top: -145px"></i>
+                                        @if ($users->id == Auth::user()->id)
+                                            <i class="fas fa-pen-alt text-black"
+                                                style="z-index: 1; margin-left:130px;margin-top: -145px"></i>
+                                        @endif
+                                    @endauth
+
                                 </div>
                                 <div class="ms-3" style="margin-top: 130px;">
                                     <h5 class="text-capitalize">{{ $users->name }}</h5>
@@ -145,8 +151,12 @@
                                                 value="{{ $users->name }}" disabled>
                                         </div>
                                         <div class="input-group form-group">
-                                            <label class="pr-4" style="margin-right: 12px">No. Telp <i class="fab fa-whatsapp ml-1 text-success"></i></label>
-                                            <a href="https://wa.me/{{ $users->no_telp }}?text=Hallo kak, saya @auth {{ Auth::user()->name }} @endauth"><p class="ml-2">+{{ $users->no_telp }}</p></a>
+                                            <label class="pr-4" style="margin-right: 12px">No. Telp <i
+                                                    class="fab fa-whatsapp ml-1 text-success"></i></label>
+                                            <a
+                                                href="https://wa.me/{{ $users->no_telp }}?text=Hallo kak, saya @auth {{ Auth::user()->name }} @endauth">
+                                                <p class="ml-2">+{{ $users->no_telp }}</p>
+                                            </a>
                                         </div>
                                         <div class="input-group form-group">
                                             <label style="margin-right: 25px">Jenis Akun</label>
@@ -181,12 +191,24 @@
 
                                 <div class="row g-2">
                                     @if (count($product) == 0)
-                                        <marquee>{{ $users->name }}, belum menambahkan produk</marquee>
+                                        <marquee>Tidak ada produk yg ditambahkan!</marquee>
 
                                     @endif
                                     @foreach ($product as $prod)
-
+                                    @include('shop.modal.modal_upd_product')
                                         <div class="col-lg-3 col-6 mt-2">
+                                            @auth
+
+                                                @if ($prod->user_id == Auth::user()->id)
+                                                    <a href="#" onclick="proDelete({{ $prod->id }})"
+                                                        class="fa fa-trash link-danger float-right"></a>
+
+                                                    <p class="fa fa-pen-alt link-warning float-right mx-2" data-mdb-toggle="modal"
+                                                    data-mdb-target="#upd-product{{ $prod->id }}"></p>
+
+                                                @endif
+                                            @endauth
+
                                             <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
                                                 class="card-img-top img-fluid rounded-6" alt="Sunset Over the Sea"
                                                 style="height: 100px; object-position: center;overflow: hidden;object-fit: cover;" />
@@ -209,20 +231,22 @@
                                                             Rp {{ $prod->harga }}
                                                         </p>
                                                     </a>
-                                                    <div class="mt-n1">
-                                                        <span class="fa fa-star text-warning"
-                                                            style="font-size: 10px;"></span>
-                                                        <span class="fa fa-star text-warning"
-                                                            style="font-size: 10px;"></span>
-                                                        <span class="fa fa-star text-warning"
-                                                            style="font-size: 10px;"></span>
-                                                        <span class="fa fa-star text-warning"
-                                                            style="font-size: 10px;"></span>
-                                                        <span class="fa fa-star" style="font-size: 10px;"></span>
+                                                    <div class="mt-n1" id="stars{{ $prod->id }}">
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <script>
+                                            function stars(id) {
+                                                const url = "/stars/" + id
+                                                $.get(url, {}, function(product, status) {
+                                                    const query = "#stars" + id
+                                                    $(query).html(product);
+                                                });
+                                            }
+                                            stars({{ $prod->id }})
+                                        </script>
                                     @endforeach
                                 </div>
 

@@ -24,7 +24,7 @@
                     <a class="nav-link @yield('booking')" href="{{ route('shop.booking') }}">Re-booking</a>
                 </li>
                 <li class="nav-item fw-bold mx-4">
-                    <a class="nav-link @yield('subscribe')" href="{{ route('shop.subscribe') }}">Subscribe</a>
+                    <a class="nav-link @yield('subscribe')" href="{{ route('shop.subscribe') }}">Langganan</a>
                 </li>
                 @if (Auth::check())
                     <form method="POST" action="{{ route('logout') }}">

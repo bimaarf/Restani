@@ -35,7 +35,16 @@
                         <div class="card-body align-middle d-flex justify-content-between">
                             <div class="row">
                                 @foreach ($productLaris->slice(0, 3) as $prod)
-
+                                    <script>
+                                        function stars(id) {
+                                            const url = "/stars/" + id
+                                            $.get(url, {}, function(product, status) {
+                                                const query = "#stars" + id
+                                                $(query).html(product);
+                                            });
+                                        }
+                                        stars({{ $prod->id }})
+                                    </script>
                                     {{-- loop --}}
                                     <div class="col-lg-4 mb-2">
                                         <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
@@ -46,12 +55,8 @@
                                         <div class="mt-n2">
                                             <small style="font-size: 12px;">{{ Str::limit($prod->title, 20) }}</small>
                                         </div>
-                                        <div class="mt-n1">
-                                            <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                            <span class="fa fa-star" style="font-size: 12px;"></span>
+                                        <div class="mt-n2" id="stars{{ $prod->id }}">
+
                                         </div>
                                         <div class="mt-n1">
                                             <small class="text-success fw-bold" style="font-size: 12px;">Rp
@@ -94,21 +99,33 @@
                                 }
 
                             </style>
+
+                            <script>
+                                function starsSide(id) {
+                                    const url = "/stars/" + id
+                                    $.get(url, {}, function(product, status) {
+                                        const query = "#starsSide" + id
+                                        $(query).html(product);
+                                    });
+                                }
+                                starsSide({{ $prod->id }})
+                            </script>
+
                             <div class="col-lg-3 col-6 mt-2">
                                 <img src="{{ asset('product/' . json_decode($prod->foto)[0]) }}"
                                     class="card-img-top img-fluid rounded-6" alt="Sunset Over the Sea"
                                     style="height: 100px; object-position: center;overflow: hidden;object-fit: cover;" />
-            
+
                                 <div class="card rounded-6 mt-n4">
                                     <div class="card-body">
-                                        <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden" value="1"
-                                            name="jumlah" id="jumlah">
+                                        <input class="border-bottom border-0 border-success mx-4 my-1" type="hidden"
+                                            value="1" name="jumlah" id="jumlah">
                                         <a href="#add" onclick="cartAdd({{ $prod->id }})"><i
                                                 class="fa fa-plus-circle text-success position-absolute"
                                                 style="right: 10px; top: 10px"></i></a>
-            
+
                                         <a href="{{ route('shop.preview', ['key' => $prod->key]) }}">
-            
+
                                             <p class="card-text text-body mt-n3 fw-bold small">
                                                 {{ Str::limit($prod->title, 20) }}
                                             </p>
@@ -116,12 +133,11 @@
                                                 Rp {{ $prod->harga }}
                                             </p>
                                         </a>
-                                        <div class="mt-n1">
-                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                            <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                                        <div class="mt-n1" id="starsSide{{ $prod->id }}">
+
+
+                                            
+
                                         </div>
                                     </div>
                                 </div>

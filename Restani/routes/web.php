@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RattingController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,9 @@ Route::get('/shop/tag', [ProductController::class, 'tag'])->name('shop.tag'); //
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop.product'); //index
 Route::get('/shop/elements', [ProductController::class, 'shopElement'])->name('shop.elements.product'); //elements
 Route::get('/shop/v/{key}', [ProductController::class, 'preview'])->name('shop.preview');
-Route::post('/product/store', [ProductController::class, 'store'])->name('shop.store')->middleware('auth');
+Route::post('/product/store', [ProductController::class, 'store'])->name('shop.store')->middleware('auth'); //add
+Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('shop.update')->middleware('auth'); //add
+Route::get('/product/delete/{id}', [ProductController::class, 'trash'])->name('shop.delete'); //delete
 
 Route::get('/cart/count', [CartController::class, 'sum'])->name('shop.elements.countCart'); //cart count
 Route::get('/cart/elements', [CartController::class, 'cartElements'])->name('shop.elements.cart'); //ajax
@@ -86,3 +89,11 @@ Route::get('/profile/{name}', [ProfileController::class, 'index'])->name('profil
 Route::get('/proifle/no-telp', [ProfileController::class, 'updTelp'])->name('profile.telp');  // add
 Route::get('/proifle/password', [ProfileController::class, 'updPass'])->name('profile.pass');  // add
 Route::post('/proifle/avatar', [ProfileController::class, 'updAvatar'])->name('profile.avatar');  // add
+
+// ratting
+Route::get('/ratting/add/{id}', [RattingController::class, 'addRat'])->name('rat.addRat');  // add
+Route::get('/ratting/upd/{id}', [RattingController::class, 'updRat'])->name('rat.updRat');  // add
+Route::get('/ratting/show/{id}', [RattingController::class, 'showRat'])->name('shop.elements.ratting'); 
+
+// stars
+Route::get('/stars/{id}', [RattingController::class, 'stars'])->name('shop.elements.stars'); 

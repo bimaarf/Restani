@@ -40,18 +40,17 @@
                             <div class="mt-n2">
                                 <small style="font-size: 12px;">{{ Str::limit($prod->title, 20) }}</small>
                             </div>
-                            <div class="mt-n1">
-                                <span class="fa fa-star text-warning mt-n1" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 12px;"></span>
-                                <span class="fa fa-star" style="font-size: 12px;"></span>
+                            <div class="mt-n1" id="starsSide{{ $prod->id }}">
+                               
                             </div>
                             <div class="mt-n1">
                                 <small class="text-success fw-bold" style="font-size: 12px;">Rp
                                     {{ $prod->harga }}</small>
                             </div>
                         </a>
+                        <script>
+                            starsSide({{ $prod->id }})
+                        </script>
                     @endforeach
 
                 </div>
@@ -110,16 +109,15 @@
                                     Rp {{ $prod->harga }}
                                 </p>
                             </a>
-                            <div class="mt-n1">
-                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
-                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <div class="mt-n1" id="stars{{ $prod->id }}" onclick="stars({{ $prod->id }})">
+                               asd
                             </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    stars({{ $prod->id }})
+                </script>
             @endforeach
         </div>
     </div>

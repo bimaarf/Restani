@@ -23,7 +23,7 @@
                                         </a>
                                     @endforeach
                                 @endif
-                                @if (Auth::user()->hasRole('mitra'))
+                                @if (Auth::user()->hasRole('mitra|admin'))
 
                                     @foreach ($users->where('id', $room->user_id) as $user)
                                         <a href="#"><img
@@ -81,7 +81,7 @@
                         </div>
                         @if (session()->has('rooma'))
 
-                            <input type="text" id="target-user" name="room_id" value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }}@endforeach">
+                            <input type="hidden" id="target-user" name="room_id" value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }}@endforeach">
 
                             @foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room)
                                 <script>

@@ -5,7 +5,7 @@
         <div class="card">
             <div class="car-header">
                 <div class="card-header bg-primary" style="border-top-left-radius: 30px; border-top-right-radius: 30px;">
-                    <h5 class="text-white text-center">Subscribe</h5>
+                    <h5 class="text-white text-center">Langganan</h5>
                 </div>
                 <div class="card-body" id="subscribe">
 

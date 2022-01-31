@@ -18,7 +18,7 @@ class ChattingController extends Controller
             $rooms = Room::where('user_id', Auth::id())
                             ->orderBy('id', 'DESC')    
                             ->get();
-        }if (Auth::user()->hasRole('mitra')) {
+        }else {
 
             $rooms = Room::where('mitra_id', Auth::id())
                             ->orderBy('id', 'DESC')    
@@ -87,7 +87,7 @@ class ChattingController extends Controller
         if (Auth::user()->hasRole('user')) {
 
             $chats = Room::where('user_id', Auth::id())->count();
-        }if (Auth::user()->hasRole('mitra')) {
+        }else {
             $chats = Room::where('mitra_id', Auth::id())->count();
         }
         return view('chats.elements.countChat', compact('chats'));

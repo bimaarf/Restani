@@ -47,16 +47,64 @@
                 <div class="float-left">
                     <p class="text-black-50 fw-bold h5">{{ $product->title }}</p>
                     <div class="my-1">
-                        <span class="fa fa-star text-warning" style="font-size: 14px;"></span>
-                        <span class="fa fa-star text-warning" style="font-size: 14px;"></span>
-                        <span class="fa fa-star text-warning" style="font-size: 14px;"></span>
-                        <span class="fa fa-star text-warning" style="font-size: 14px;"></span>
-                        <span class="fa fa-star" style="font-size: 14px;"></span>
+                        @if (count($ratting) > 0)
+                            @if ($mean / count($ratting) > 0 && $mean / count($ratting) < 2)
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                            @endif
+                            @if ($mean / count($ratting) >= 2 && $mean / count($ratting) < 3)
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                            @endif
+                            @if ($mean / count($ratting) >= 3 && $mean / count($ratting) < 4)
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                            @endif
+                            @if ($mean / count($ratting) >= 4 && $mean / count($ratting) < 5)
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star" style="font-size: 10px;"></span>
+                            @endif
+                            @if ($mean / count($ratting) == 5)
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                                <span class="fa fa-star text-warning" style="font-size: 10px;"></span>
+                            @endif
+                            <br>
+                            <div style="font-size: 12px;">
+                                {{ $mean / count($ratting) }} <small class="text-black-50">({{ count($ratting) }}
+                                    Ulasan)</small>
+                            </div>
+
+                        @else
+                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <span class="fa fa-star" style="font-size: 10px;"></span>
+                            <div style="font-size: 12px;">
+                                <small class="text-black-50">(Belum ada ulasan)</small>
+                            </div>
+                        @endif
+
                     </div>
                     <p class="h5 text-success">Rp {{ $product->harga }}</p>
                 </div>
                 <div id="favorite"></div>
-                
+
                 <br><br><br><br><br>
                 <span class="float-end"><i class="fas fa-tags"></i> {{ $product->kategori->name }}</span>
                 @if ($product->stok > 0)
@@ -95,8 +143,14 @@
                     <button onclick="subAdd({{ $product->id }})"
                         class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right"
                         type="submit">Langganan</button>
-                    <input class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right" type="submit"
-                        value="Beli Sekarang">
+                    @auth
+
+                        <a target="__blank"
+                            href="https://wa.me/{{ $product->user->no_telp }}?text= *Re-Booking!*%0A Hallo kak saya {{ Auth::user()->name }}, %0A _Produk yg saya pesan_ %0A  %0A {{ $product->title }}%0A       jumlah ="
+                            class="btn btn-info rounded my-1 mx-4 text-capitalize w-50 float-right">Bayar
+                            Sekarang</a>
+                    @endauth
+
 
                 </div>
                 <div class="float-left mt-4">
@@ -138,9 +192,9 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link text-capitalize fs-6" id="profile-tab0" data-mdb-toggle="tab"
-                            data-mdb-target="#profile0" type="button" role="tab" aria-controls="profile"
-                            aria-selected="false">
+                        <button class="nav-link text-capitalize fs-6" onclick="ratShow({{ $product->id }})"
+                            id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button" role="tab"
+                            aria-controls="profile" aria-selected="false">
                             Reviews
                         </button>
                     </li>
@@ -157,8 +211,8 @@
                             <input id="message" type="text" value="" maxlength="250"
                                 class="form-control border-0 border-bottom" name="message" placeholder='Ketikkan komentar..'
                                 style="border-color: inherit;
-                                                                        -webkit-box-shadow: none;
-                                                                        box-shadow: none;">
+                                                                                        -webkit-box-shadow: none;
+                                                                                        box-shadow: none;">
 
                             <button onclick="addComment({{ $product->id }})" type="submit"
                                 class="btn btn-outline-success fas fa-paper-plane"></button>
@@ -168,7 +222,7 @@
                     </div>
                     <div class="tab-pane fade border p-4 rounded-6" id="profile0" role="tabpanel"
                         aria-labelledby="profile-tab0">
-                        {!! $product->desc !!}
+                        <div id="ratting"></div>
                     </div>
                 </div>
             </div>
