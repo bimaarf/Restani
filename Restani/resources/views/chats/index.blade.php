@@ -74,8 +74,6 @@
                                 alt="avatar 3" style="width: 40px; height: 100%;">
                             <input name="chat" type="text" class="form-control form-control-lg" id="chatq"
                                 placeholder="Type message">
-                            <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
-                            <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
                             <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>

@@ -118,7 +118,7 @@ class ProductController extends Controller
         $product->slug              = Str::slug($request->title);
         $product->harga             = $request->harga;
         $product->stok              = $request->stok;
-        $product->kategori_id       = $request->kategori_id;
+        $product->kategori_id              = $request->kategori_id;
         $product->update();
         return back()->with('success', 'Berhasil diubah!');
     }

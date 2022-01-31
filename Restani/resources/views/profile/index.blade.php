@@ -6,7 +6,7 @@
 
             @if ($users->id == Auth::user()->id)
                 @include('shop.modal.modal_add_product')
-                
+
                 <!-- Button trigger modal -->
                 <!-- Modal -->
 
@@ -195,7 +195,7 @@
 
                                     @endif
                                     @foreach ($product as $prod)
-                                    @include('shop.modal.modal_upd_product')
+                                        @include('shop.modal.modal_upd_product')
                                         <div class="col-lg-3 col-6 mt-2">
                                             @auth
 
@@ -203,8 +203,9 @@
                                                     <a href="#" onclick="proDelete({{ $prod->id }})"
                                                         class="fa fa-trash link-danger float-right"></a>
 
-                                                    <p class="fa fa-pen-alt link-warning float-right mx-2" data-mdb-toggle="modal"
-                                                    data-mdb-target="#upd-product{{ $prod->id }}"></p>
+                                                    <p class="fa fa-pen-alt link-warning float-right mx-2"
+                                                        data-mdb-toggle="modal"
+                                                        data-mdb-target="#upd-product{{ $prod->id }}"></p>
 
                                                 @endif
                                             @endauth

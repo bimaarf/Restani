@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChattingController;
@@ -26,9 +27,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 Route::get('/shop/tag', [ProductController::class, 'tag'])->name('shop.tag'); //index
@@ -96,4 +97,8 @@ Route::get('/ratting/upd/{id}', [RattingController::class, 'updRat'])->name('rat
 Route::get('/ratting/show/{id}', [RattingController::class, 'showRat'])->name('shop.elements.ratting'); 
 
 // stars
-Route::get('/stars/{id}', [RattingController::class, 'stars'])->name('shop.elements.stars'); 
+Route::get('/stars/{id}', [RattingController::class, 'stars'])->name('shop.elements.stars'); //stars
+
+// admin
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware(['auth', 'role:admin']); //dashboard
+Route::get('/admin/shop', [AdminController::class, 'product'])->name('admin.product')->middleware(['auth', 'role:admin']); //product

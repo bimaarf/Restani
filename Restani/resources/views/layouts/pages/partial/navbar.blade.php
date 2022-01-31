@@ -70,27 +70,33 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item"
-                                    href="{{ route('profile.index', ['name' => Auth::user()->name]) }}">Profil</a></li>
+                                    href="{{ route('profile.index', ['name' => Auth::user()->name]) }}">Profil</a>
+                            </li>
 
                             <li>
+                            @if (Auth::user()->hasRole('admin'))
 
-                                @if (Auth::check())
-                                    <button class="dropdown-item" onclick="logout()">Logout</button>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button id="logoutTrue" class="dropdown-item d-none"
-                                            href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</button>
-                                    </form>
-                                @endif
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            @else
-                <a href="{{ route('login') }}" class="text-success fs-6 fw-bold mx-4">Login</a>
-                <a href="{{ route('register') }}"
-                    class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            @endif
+
+            <li>
+
+                @if (Auth::check())
+                    <button class="dropdown-item" onclick="logout()">Logout</button>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button id="logoutTrue" class="dropdown-item d-none" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</button>
+                    </form>
+                @endif
+            </li>
+            </ul>
+            </li>
+            </ul>
+        @else
+            <a href="{{ route('login') }}" class="text-success fs-6 fw-bold mx-4">Login</a>
+            <a href="{{ route('register') }}"
+                class="btn btn-outline-success fw-bold fs-6 text-capitalize rounded-pill">Register</a>
             @endif
 
         </div>
