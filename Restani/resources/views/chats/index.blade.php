@@ -7,12 +7,10 @@
                     style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;">
                     <ul class="list-unstyled overflow-y-scroll" style="position: relative; height: 600px;">
                         @foreach ($rooms as $room)
-
                             <li id="select{{ $room->id }}" onclick="target({{ $room->id }})"
                                 class="p-2 ml-4 my-4 border"
                                 style="border-top-left-radius: 50px;border-bottom-left-radius: 50px; ">
                                 @if (Auth::user()->hasRole('user'))
-
                                     @foreach ($users->where('id', $room->mitra_id) as $user)
                                         <a href="#"><img
                                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
@@ -24,7 +22,6 @@
                                     @endforeach
                                 @endif
                                 @if (Auth::user()->hasRole('mitra|admin'))
-
                                     @foreach ($users->where('id', $room->user_id) as $user)
                                         <a href="#"><img
                                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
@@ -37,7 +34,6 @@
                                 @endif
 
                             </li>
-
                         @endforeach
                     </ul>
                 </div>
@@ -46,13 +42,11 @@
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                             class=" rounded-circle img-thumbnail" width="50" alt="avatar">
                         @if (session()->has('rooma'))
-
                             <span class="h6 ml-4 text-capitalize" id="title">
                                 @foreach ($users->where('id', $rooma['mitra_id']) as $usr)
                                     {{ $usr->name }}
                                 @endforeach
                             </span>
-
                         @else
                             <span class="h6 ml-4" id="title"></span>
                         @endif
@@ -78,15 +72,14 @@
 
                         </div>
                         @if (session()->has('rooma'))
-
-                            <input type="hidden" id="target-user" name="room_id" value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }}@endforeach">
+                            <input type="hidden" id="target-user" name="room_id"
+                                value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }} @endforeach">
 
                             @foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room)
                                 <script>
                                     target({{ $room->id }})
                                 </script>
                             @endforeach
-
                         @else
                             <input type="hidden" id="target-user" name="room_id" value="">
                         @endif
@@ -101,7 +94,6 @@
     var condition = true;
 
     function box(id) {
-
         const url = "/chatting/box/" + id
         $.get(url, {}, function(chattings, status) {
             const query = "#box"
@@ -130,7 +122,6 @@
         $("#target-user").val(id);
         sunting()
         box(id);
-        console.log('load')
 
     }
 
