@@ -126,6 +126,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+        foreach (json_decode($product->foto) as $img_decode) {
+
+            unlink('product/'. $img_decode);
+        }
         $checkouts = Checkouts::where('product_id', $id)->get();
         $bookings = Booking::where('product_id', $id)->get();
         $subscribe = Subscribe::where('product_id', $id)->get();
