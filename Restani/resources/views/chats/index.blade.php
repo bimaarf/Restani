@@ -67,12 +67,12 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
                                 alt="avatar 3" style="width: 40px; height: 100%;">
                             <input name="chat" type="text" class="form-control form-control-lg" id="chatq"
-                                placeholder="Type message">
-                            <a onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
+                                placeholder="Type message" required>
+                            <a  onclick="store()" class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
 
                         </div>
                         @if (session()->has('rooma'))
-                            <input type="hidden" id="target-user" name="room_id"
+                            <input type="hidden" id="target-user" name="room_id" required
                                 value="@foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room){{ $room->id }} @endforeach">
 
                             @foreach ($rooms->where('mitra_id', $rooma['mitra_id']) as $room)
@@ -126,6 +126,7 @@
     }
 
     function store() {
+        if ($('#chatq').val() === '') return alert('Pesan tidak boleh kosong')
         const url = "/chatting/store";
         const chat = $("#chatq").val();
         const target = $("#target-user").val();
@@ -137,7 +138,7 @@
                 room_id: target
             },
             success: function(response) {
-                $("#chatq").val('');
+                $("#chatq").val('')
                 box(target);
 
             },

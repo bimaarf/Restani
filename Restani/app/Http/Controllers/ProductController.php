@@ -80,7 +80,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'foto'      =>      'required',
-            'foto.*'      =>      'mimes:jpeg,jpg,png',
+            'foto.*'      =>      'image|mimes:jpeg,jpg,png',
         ]);
 
         $product                    = new Product();
